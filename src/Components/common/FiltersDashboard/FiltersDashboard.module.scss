@@ -1,0 +1,199 @@
+$background-gray: #FAFAFA;
+$thin-gray-border: 1px solid #D8D1CA;
+$light-beige-gray: #D8D1CA;
+$lime: #64E80C;
+$dark-fontcolor: #333333;
+$gray-fontcolor: #666666;
+$small-fontSize: 14px;
+$light-background: #FAFAFA;
+
+
+.menuBar {
+    display: flex;
+    border-top: $thin-gray-border;
+    border-bottom: $thin-gray-border;
+    height: 90px;
+    background: $light-background;
+}
+
+.filters {
+    flex: 3;
+}
+
+.selectedfilters,
+.selectedfilters div {
+    font-size: $small-fontSize;
+    color: $dark-fontcolor;
+    display: inline-block;
+    font-weight: 700;
+    padding: 0 6px;
+}
+
+.selectedfilters {
+    margin: 10px auto 26px 14px;
+}
+
+.filtersOptions {
+    margin: auto auto auto 14px;
+    cursor: pointer;
+    display: block;
+}
+
+.filterName/* , 
+.otherFilterName */ {
+    display: inline-block;
+    height: 40px;
+    bottom: 7px;
+    font-size: $small-fontSize;
+    font-weight: 700;
+    padding: 0 4px;
+    color: $gray-fontcolor;
+    position: relative;
+    &::after {
+        position: absolute;
+        width: 0;
+        content: '';
+        height: 3px;
+        background: $lime;
+        bottom: 40px;
+        right: 0;
+        left: 0;
+        transition: all 500ms;
+    }
+
+    &:hover {
+        &::after {
+            width: 100%;
+        }        
+        border: 1px solid $light-beige-gray;
+        border-bottom: none;
+        border-top: none;
+        color: $lime;        
+    }
+
+    &:hover {
+        &::before {
+            position: absolute;
+            box-sizing: padding-box;
+            width: 100%;
+            content: '';
+            height: 2px;
+            z-index: 1;
+            background: $light-background;
+            left: 0;
+            top: 39px;
+        }
+    }
+}
+
+.otherFilterName {
+    /* height: auto; */
+    display: inline-block;
+    /* height: 40px; */
+    bottom: 7px;
+    font-size: $small-fontSize;
+    font-weight: 700;
+    padding: 0 4px;
+    color: $gray-fontcolor;
+    position: relative;
+    &::after {
+        position: absolute;
+        width: 0;
+        content: '';
+        height: 3px;
+        background: $lime;
+        bottom: 40px;
+        right: 0;
+        left: 0;
+        transition: all 500ms;
+        top: -4px;
+    }
+
+    &:hover {
+        &::after {
+            width: 100%;
+        }        
+        border: 1px solid $light-beige-gray;
+        border-bottom: none;
+        border-top: none;
+        color: $lime;        
+    }
+
+    &:hover {
+        &::before {
+            position: absolute;
+            box-sizing: padding-box;
+            width: 100%;
+            content: '';
+            height: 2px;
+            z-index: 1;
+            background: $light-background;
+            left: 0;
+            top: 39px;
+        }
+    }
+    height: 18px;
+    border-right: 1px solid $light-beige-gray;
+    /* border: 1px solid red; */
+
+}
+
+/* .filterName {
+    padding-top: 0;
+    margin-top: 0;
+} */
+
+.filterName:first-child {
+    border-left: 1px solid #D8D1CA;
+}
+
+.sortBoard {
+    flex: 1;
+}
+
+.filters img {
+    margin-bottom: -5px;
+}
+.selectedfilters img {
+    margin-right: 5px;
+}
+
+.hiddenAccordeon {
+    display: none;
+}
+
+.accordeon {
+    position: absolute;
+    width: 140%;
+    background: $light-background;
+    border: 1px solid $light-beige-gray;
+    border-top: none;
+    top: 100%;
+    left: -1px;
+    padding: 4px;
+}
+
+.filterCheckBoxLabel {
+    display: block;
+    color: $gray-fontcolor;
+    margin-top: 6px;
+    cursor: pointer;
+}
+.filterCheckBoxWrapper {
+    /* border: 1px solid red; */
+    display: inline-block;
+}
+.filterCheckBoxWrapper:first-child {
+  /*   position: relative;
+    margin-top: 14px;
+
+    &:first-child::before {
+        position: absolute;
+        width: 55%;
+        content: '';
+        background: $light-beige-gray;
+        bottom: 170%;
+        right: -56%;
+        height: 1px;
+    } */
+}

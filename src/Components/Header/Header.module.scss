@@ -1,0 +1,47 @@
+$primary-color: #666666;
+$lime: #64E80C; 
+
+.mainWrapper {
+    border-bottom: 1px solid #D8D1CA;
+    display: flex;
+    height: 70px;
+    min-width: 100%;
+}
+
+
+.logoWrap {
+    width: 180px;
+    border-right: 1px solid #D8D1CA;
+
+}
+.logo {
+    width: 150px;
+    margin: 22px auto;
+    display: block;
+
+    
+}
+.navWrap {
+    width: 60%;
+    border-right: 1px solid #D8D1CA;
+    display: flex;
+}
+.navItem {
+    /* width: 134px; */
+    width: fit-content;
+    margin-left: 40px ;
+    
+}
+.navItem span {
+    margin: 24px auto;
+    display: block;
+    font-weight: 800;
+    color: $primary-color;
+    font-size: 16px;
+    width: fit-content;
+}
+
+.menuItem {
+    font-size: 10px;
+    width: 70px; 
+}
