@@ -4,13 +4,13 @@ import { BreadCrumbs } from '../common/BreadCrumbs/BreadCrumbs';
 import { FiltersDashboard } from '../common/FiltersDashboard/FiltersDashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { onSelectFilter } from '../../redux/filtersSlice';
+import { Catalog } from '../common/Catalog/Catalog';
 
 export const Women = () => {
     const filterOptions = useSelector(state => state.filters.filterOptions);
 
     const dispatch = useDispatch();
     const selectFilter = (filter, option) => {
-        //console.log(filter, option);
         dispatch(onSelectFilter({filter, option}))
     }
 
@@ -35,7 +35,7 @@ export const Women = () => {
         </section>
 
         <FiltersDashboard filterOptions={filterOptions} selectFilter={selectFilter} />
-
+        <Catalog />
         <section className={c.sortBoard}>
             <div></div>
             <div></div>

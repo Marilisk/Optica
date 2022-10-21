@@ -1,0 +1,35 @@
+$background-gray: #FAFAFA;
+$thin-gray-border: 1px solid #D8D1CA;
+$light-beige-gray: #D8D1CA;
+$lime: #64E80C;
+$dark-fontcolor: #333333;
+$gray-fontcolor: #666666;
+$small-fontSize: 14px;
+$light-background: #FAFAFA;
+
+.wrap {
+    /* height: 300px; */
+    background: white;
+    position: relative;
+    
+    
+    &:hover {
+        box-shadow: 2px 2px 18px 3px #DADADA;
+        transition: all 700ms;
+        z-index: 1;
+        /* border: 1px solid red; */
+    }
+    img {
+        width: 100%;
+        position: absolute;
+        top: 14%
+
+    }
+}
+
+.price {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+}
+

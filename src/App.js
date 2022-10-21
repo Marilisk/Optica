@@ -8,9 +8,6 @@ import { Women } from './Components/Women/Women';
 import { Men } from './Components/Men/Men';
 import { Children } from './Components/Children/Children';
 import { Brands } from './Components/Brands/Brands';
-import categories from './redux/categoriess/categories';
-
-
 
 
 function App() {

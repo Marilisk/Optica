@@ -20,7 +20,7 @@ export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
                     100 товаров:
                     {filterOptions.filter(elem => elem.isSelected).map(elem => {
                         return <div key={elem.id}>
-                            {elem.name}: {elem.chosenOptions.map(el => <span>{el} <img alt='' src={smallCross} onClick={() => selectFilter(elem.id, el)} /> </span>)} 
+                            {elem.name}: {elem.chosenOptions.map(el => <span>{el} <img alt='' src={smallCross} onClick={() => selectFilter(elem.id, el)} /> </span>)}
                         </div>
                     })}
                 </div>
@@ -29,12 +29,9 @@ export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
                     {filterOptions.map(elem => {
                         return <div key={elem.name} className={filterOpened === elem.id ? c.filterName : c.otherFilterName} onMouseOver={() => onHover(elem.id)} onMouseLeave={() => onHover(null)} >
                             {elem.name} <img alt='' src={filterOpened === elem.id ? sortUpIcon : sortDownIcon} />
-
                             <div key={elem.name + 'd'} className={c.filterMenu}>
-
                                 <div key={elem.name + 'e'} className={filterOpened === elem.id ? c.accordeon : c.hiddenAccordeon} >
                                     {elem.options?.map(el => {
-
                                         return <div key={el + 'c'} className={c.filterCheckBoxWrapper}>
                                             <label key={el + 'l'} className={c.filterCheckBoxLabel}>
                                                 <input key={el}
@@ -42,26 +39,17 @@ export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
                                                     value={el}
                                                     name={'checkbox'}
                                                     checked={elem.chosenOptions.find(it => it === el)}
-                                                    onChange={() => selectFilter(elem.id, el) } />
+                                                    onChange={() => selectFilter(elem.id, el)} />
                                                 {el}
                                             </label>
                                         </div>
-
                                     })}
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     })}
-
                 </div>
-
             </div>
-
-
         </section>
 
         <section className={c.sortBoard}>

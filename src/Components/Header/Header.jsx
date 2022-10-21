@@ -1,21 +1,25 @@
 import c from './Header.module.scss';
 import logo from './../../assets/header/lime-logo.png';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export const Header = () => {
 
     return <div className={c.mainWrapper}>
+
         <div className={c.logoWrap}>
-            <img src={logo} alt="" className={c.logo} />
+            <NavLink to={`/`}>
+                <img src={logo} alt="" className={c.logo} />
+            </NavLink>
         </div>
+
         <div className={c.navWrap}>
             <NavLink to={`women`}>
                 <div className={c.navItem}>
                     <span>Женщины</span>
                 </div>
             </NavLink>
-            
+
             <NavLink to={`men`}>
                 <div className={c.navItem}>
                     <span>Мужчины</span>
@@ -24,19 +28,18 @@ export const Header = () => {
             </NavLink>
 
             <NavLink to={`children`}>
-            <div className={c.navItem}>
-                <span>Дети</span>
-            </div>
+                <div className={c.navItem}>
+                    <span>Дети</span>
+                </div>
             </NavLink>
-            
+
             <NavLink to={`brands`}>
-            <div className={c.navItem}>
-                <span>Brand</span>
-            </div>
+                <div className={c.navItem}>
+                    <span>Brand</span>
+                </div>
             </NavLink>
         </div>
         <div className={c.menuWrap}></div>
-
 
 
         <div className={c.menuItem}>
