@@ -2,7 +2,7 @@ import c from './App.module.css';
 import { Header } from './Components/Header/Header.jsx';
 import { Footer } from './Components/Footer/Footer';
 import { Routes, Route } from 'react-router-dom';
-import { router } from './router';
+//import { router } from './router';
 import { MainPage } from './Components/MainPage/MainPage';
 import { Women } from './Components/Women/Women';
 import { Men } from './Components/Men/Men';

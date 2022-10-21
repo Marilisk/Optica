@@ -72,7 +72,7 @@ const productsSlice = createSlice({
     },
     reducers: {
         onAddToCart(state, action) {
-            const item = state.items.find(el => el.id === action.payload.item);
+            //const item = state.items.find(el => el.id === action.payload.item);
                    
         },
         

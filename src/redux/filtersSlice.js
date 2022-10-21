@@ -56,19 +56,15 @@ const filtersSlice = createSlice({
                 isSelected: false,
             },
         ]
-        
+
     },
     reducers: {
         onSelectFilter(state, action) {
             const item = state.filterOptions.find((el) => el.id === action.payload.filter);
-            //console.log([...item.chosenOptions]);
-            //item.isSelected = true;
-
             let isOptionChosen = item.chosenOptions.includes(action.payload.option);
-            //console.log(isOptionChosen);
             if (isOptionChosen) {
                 console.log([...item.chosenOptions]);
-                item.chosenOptions = item.chosenOptions.filter(chosenOption => chosenOption !== action.payload.option );
+                item.chosenOptions = item.chosenOptions.filter(chosenOption => chosenOption !== action.payload.option);
                 item.options.push(action.payload.option);
                 item.isSelected = item.chosenOptions.length;
             } else {
@@ -76,25 +72,8 @@ const filtersSlice = createSlice({
                 item.options = item.options.filter(opt => opt !== action.payload.option);
                 item.isSelected = item.chosenOptions.length;
             }
-
-            
-
-            
-
-            /* let isOptionChosen = item.chosenOptions.indexOf(action.payload.option);
-            console.log(isOptionChosen);
-            if (item.chosenOptions.indexOf(action.payload.option)) {
-                item.chosenOptions.splice(isOptionChosen);
-                console.log(item.chosenOptions);
-            } else {
-                item.chosenOptions.push(action.payload.option);
-                console.log(item.chosenOptions);
-
-            } */
-
-       
         },
-        
+
     }
 })
 

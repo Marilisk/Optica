@@ -1,5 +1,5 @@
 
-import { Link, NavLink } from 'react-router-dom';
+//import { Link, NavLink } from 'react-router-dom';
 import { Offer } from '../Offer/Offer';
 import c from './MainPage.module.scss';
 
