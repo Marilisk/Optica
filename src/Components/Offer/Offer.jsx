@@ -8,7 +8,7 @@ import defaultGlasses from './../../assets/common/defaultGlasses.webp';
 export const Offer = () => {
 
     const categories = useSelector(state => state.categories.categories);
-    console.log(categories);
+    
     const firstLevelCategories = categories.filter(cat => cat.fields.level === 1).map(cat => {
         return <div key={cat.pk}>
             <img src={defaultGlasses} alt='' />

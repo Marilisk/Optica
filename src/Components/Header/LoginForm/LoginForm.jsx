@@ -6,8 +6,8 @@ import { CustomCheckbox } from '../../../assets/form_elements/CustomCheckbox/Cus
 export const LoginForm = () => {
 
     const [loginData, setLoginData] = useState({
-        email: null,
-        password: null,
+        email: '',
+        password: '',
         rememberMe: false,
     });
 

@@ -12,6 +12,7 @@ $light-background: #FAFAFA;
 .wrap {
     margin: 0 auto;
     width: 350px;
+    transition: all 700ms;
     //border: 1px solid pink;
 
     input {
@@ -26,6 +27,7 @@ $light-background: #FAFAFA;
         padding-left: 20px;
         box-sizing: padding-box;
         font-size: 14px;
+        
 
         &:focus {
             outline: none;
@@ -44,9 +46,7 @@ $light-background: #FAFAFA;
         font-weight: 600;
         margin-bottom: 1.3em;
         cursor: pointer;
-
     }
-
 }
 
 .underBtn {

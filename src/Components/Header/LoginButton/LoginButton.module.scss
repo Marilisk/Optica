@@ -31,13 +31,11 @@ $light-background: #FAFAFA;
             width: 101%;
         }
     }
-
     img {
         height: 24px;
         display: block;
         margin: 0 auto;
     }
-
     p {
         margin: 0 auto;
         text-align: center;
@@ -46,47 +44,51 @@ $light-background: #FAFAFA;
 }
 
 .modal, .hiddenModal {
-    visibility: hidden;
-    pointer-events: none;
-    position: fixed;
+    position: absolute;
     height: 461px;
     width: 410px;
     border: $thin-gray-border;
     background: $light-background;
     top: 70px;
     right: 161px;
-    //animation: hiddenModal 600ms ease-in;
-    
+    z-index: 10;
     h2 {
         font-size: 26px;
         margin: 30px;
     }
 }
 
+
 .modal {
-    //display: block;
     visibility: visible;
-    //opacity: 1;
     pointer-events: all;
-    animation: modal 500ms ease-in;
-    
+    //transition: opacity 1400ms;
+    animation: modal 500ms ease;
+    animation-fill-mode: forwards;    
 }
 .hiddenModal {
     pointer-events: none;
-    //visibility: hidden;
-    transition: all 700ms ease-in;
-    opacity: 0;
-    
+    //display: none;
+    //opacity: 0;
+    //transition: opacity 1400ms;
+    animation: hiddenmodal 400ms ease;
+    animation-fill-mode: forwards;
 }
 
 @keyframes modal {
-    from {height: 0;};
-    to {height: 461px;};
+    from {transform: 
+        translateY(-300px);
+        opacity: 0;};
+    to {transform: translateY(0px);
+        opacity: 1;};
 }
 
 @keyframes hiddenmodal {
-    from {height: 461px;};
-    to {height: 0;};
+    from {transform: translateY(0px);};
+    to {transform: 
+        /* scale(0.2) */
+        translateY(-534px);
+        opacity: 0};
 }
 
 
@@ -94,7 +96,6 @@ $light-background: #FAFAFA;
 .signUpOffer {
     background: #DDDDDD;
     font-weight: 700;
-    //width: 100%;
     height: 52px;
     padding: 1.2em 30px;
     line-height: 1.6em;
