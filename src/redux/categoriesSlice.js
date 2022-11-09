@@ -6,20 +6,6 @@ const categoriesSlice = createSlice({
         categories: [
             {
                 "model": "shop.category",
-                "pk": 8,
-                "fields": {
-                    "name": "root",
-                    "parent": null,
-                    "slug": "root",
-                    "photo": "noimage.png",
-                    "lft": 1,
-                    "rght": 16,
-                    "tree_id": 1,
-                    "level": 0
-                }
-            },
-            {
-                "model": "shop.category",
                 "pk": 3,
                 "fields": {
                     "name": "Аксессуары",
@@ -64,7 +50,7 @@ const categoriesSlice = createSlice({
                 "model": "shop.category",
                 "pk": 1,
                 "fields": {
-                    "name": "Оправы",
+                    "name": "Blue Light",
                     "parent": 8,
                     "slug": "opravy",
                     "photo": "noimage.png",
@@ -78,7 +64,7 @@ const categoriesSlice = createSlice({
                 "model": "shop.category",
                 "pk": 2,
                 "fields": {
-                    "name": "Оправы женские",
+                    "name": "Солнечные очки",
                     "parent": 1,
                     "slug": "opravy-zhenskie",
                     "photo": "noimage.png",
@@ -90,23 +76,9 @@ const categoriesSlice = createSlice({
             },
             {
                 "model": "shop.category",
-                "pk": 6,
-                "fields": {
-                    "name": "Оправы детские",
-                    "parent": 1,
-                    "slug": "opravy-detskie",
-                    "photo": "noimage.png",
-                    "lft": 11,
-                    "rght": 12,
-                    "tree_id": 1,
-                    "level": 2
-                }
-            },
-            {
-                "model": "shop.category",
                 "pk": 5,
                 "fields": {
-                    "name": "Оправы мужские",
+                    "name": "Готовые очки",
                     "parent": 1,
                     "slug": "opravy-muzhskie",
                     "photo": "noimage.png",

@@ -12,7 +12,7 @@ export const CustomCheckbox = ({rememberMe, onChange }) => {
                 type='checkbox'
                 value={rememberMe}
                 className={c.checkBx}
-                onChange={() => onChange(!rememberMe)} />
+                onChange={onChange /* () => onChange(!rememberMe) */} />
             <label htmlFor='rememberMe'>Запомнить меня</label>
     </div>
 

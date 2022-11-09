@@ -51,7 +51,7 @@ $light-background: #FAFAFA;
     background: $light-background;
     top: 70px;
     right: 161px;
-    z-index: 10;
+    visibility: hidden;
     h2 {
         font-size: 26px;
         margin: 30px;
@@ -62,15 +62,12 @@ $light-background: #FAFAFA;
 .modal {
     visibility: visible;
     pointer-events: all;
-    //transition: opacity 1400ms;
     animation: modal 500ms ease;
     animation-fill-mode: forwards;    
 }
 .hiddenModal {
+    
     pointer-events: none;
-    //display: none;
-    //opacity: 0;
-    //transition: opacity 1400ms;
     animation: hiddenmodal 400ms ease;
     animation-fill-mode: forwards;
 }
@@ -86,10 +83,19 @@ $light-background: #FAFAFA;
 @keyframes hiddenmodal {
     from {transform: translateY(0px);};
     to {transform: 
-        /* scale(0.2) */
         translateY(-534px);
         opacity: 0};
 }
+
+/* @keyframes modal {
+    from {height: 20px; display: none;};
+    to {height: 461px; display: block};
+}
+
+@keyframes hiddenmodal {
+    from {height: 461px; opacity: 1;};
+    to {height: 20px; opacity: 0;};
+} */
 
 
 

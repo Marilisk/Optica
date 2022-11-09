@@ -6,6 +6,7 @@ $dark-fontcolor: #333333;
 $gray-fontcolor: #666666;
 $small-fontSize: 14px;
 $light-background: #FAFAFA;
+$serif-font-family: 'Playfair Display SC', serif;
 
 
 .mainWrapper {
@@ -15,12 +16,11 @@ $light-background: #FAFAFA;
     h2 {
         font-size: 36px;
         font-weight: 800;
-        
+        font-family: $serif-font-family;        
     }
     p {
         font-size: 24px;
         font-weight: 600;
-
     }
 }
 
@@ -29,6 +29,8 @@ $light-background: #FAFAFA;
     justify-content: space-evenly;
     margin: 0 auto;
     margin-top: 10px;
+    font-weight: 500;
+    font-size: 20px;
     div {
         margin: 0 2%;
         &:hover {
@@ -45,4 +47,11 @@ $light-background: #FAFAFA;
         height: 100px;
 
     }
+}
+
+@media screen and (max-width: 1420px ) {
+    .carousel {
+        flex-wrap: wrap;
+    }
+    
 }

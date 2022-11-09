@@ -8,6 +8,7 @@ import { Women } from './Components/Women/Women';
 import { Men } from './Components/Men/Men';
 import { Children } from './Components/Children/Children';
 import { Brands } from './Components/Brands/Brands';
+import { LoginPage } from './Components/Header/LoginPage/LoginPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/men' element={<Men />} />
         <Route path='/children' element={<Children />} />
         <Route path='/brands/:slug' element={<Brands />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </div>
     <Footer />

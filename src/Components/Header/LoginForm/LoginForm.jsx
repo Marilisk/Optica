@@ -1,9 +1,12 @@
 import c from './LoginForm.module.scss';
 import { useState } from 'react';
 import { CustomCheckbox } from '../../../assets/form_elements/CustomCheckbox/CustomCheckbox';
+//import { useDispatch } from 'react-redux';
 
 
 export const LoginForm = () => {
+    //const dispatch = useDispatch();
+    
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -14,7 +17,6 @@ export const LoginForm = () => {
     const handleSubmit = () => {
         console.log(loginData);
     }
-
    
     return <div className={c.wrap}>
         <form onSubmit={handleSubmit}>
