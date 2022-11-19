@@ -9,5 +9,18 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 $serif-font-family: 'Playfair Display SC', serif;
 
-
-
+.mainWrapper h2, .mainWrapper h3 {
+    font-family: $serif-font-family;
+    text-align: center;
+}
+.galleryWrapper {
+    display: flex;
+}
+.item {
+    border: 1px solid firebrick;
+    width: 30%;
+}
+.item img {
+    width: 200px;
+    height: 200px;
+}

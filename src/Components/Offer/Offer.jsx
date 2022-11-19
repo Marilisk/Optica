@@ -2,31 +2,17 @@
 import { useSelector } from 'react-redux';
 import c from './Offer.module.scss';
 import defaultGlasses from './../../assets/common/defaultGlasses.webp';
-
+import { offerImgLib } from '../../assets/offer/offerImgLib';
 
 
 export const  Offer = () => {
 
     const categories = useSelector(state => state.categories.categories);
     
-    /* const firstLevelCategories = categories.filter(cat => cat.fields.level === 1).map(cat => {
-        return <div key={cat.pk}>
-            <img src={defaultGlasses} alt='' />
-            {cat.fields.name}
-        </div>
-    });
-
-    const secondLevelCategories = categories.filter(cat => cat.fields.level === 2).map(cat => {
-        return <div key={cat.pk}>
-            <img src={defaultGlasses} alt='' />
-            {cat.fields.name}
-        </div>
-    }); */
-
-    const allCategories = categories.map(cat => {
-        return <div key={cat.pk}>
-            <img src={defaultGlasses} alt='' />
-            {cat.fields.name}
+    const allCategories = categories.map((cat, i) => {
+        return <div key={i}>
+            <img src={offerImgLib[`${cat.fields.photo}`] } alt='' />
+            <p>{cat.fields.name}</p>
         </div>
     });
 
@@ -41,11 +27,7 @@ export const  Offer = () => {
         </p>
         <div className={c.carousel}>
             {allCategories}
-            {/* {firstLevelCategories} */}
-
         </div>
-        {/* <div className={c.carousel}>
-            {secondLevelCategories}
-        </div> */}
+       
     </div>
 }

@@ -1,6 +1,6 @@
-$lime: #64E80C;
-$lightLime: #90EC53;
+$green: #11A834;
 $violet: #95009C;
+$dark-violet: #57005C;
 $thin-gray-border: 1px solid #D8D1CA;
 $light-beige-gray: #D8D1CA;
 $dark-fontcolor: #333333;
@@ -9,11 +9,15 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 $serif-font-family: 'Playfair Display SC', serif;
 
+h2, h3 {
+    font-family: $serif-font-family;
+}
 .firstRow {
     display: flex;
-    justify-content: space-around;
+    //justify-content: space-around;
     justify-content: center;
-    max-height: 481px ;
+    max-height: 481px;
+    max-height: 681px;
     max-width: 1440px; 
     margin: 0 auto;
     img {
@@ -22,31 +26,31 @@ $serif-font-family: 'Playfair Display SC', serif;
     }
 
     div {
-        width: 37%;
+        //width: 37%;
+        width: 25%;
+        //width: auto;
         margin: 16px 0;
-        background: $violet;
+        background: $dark-violet;
         color: white;
         padding: 30px;
     }
 
     h2 {
         font-size: 34px;
-        font-family: $serif-font-family;
-        font-weight: 900;
-
+        font-weight: 700;
+        letter-spacing: .03em;
     }
+
+    .subscrP {
+        font-size: $small-fontSize;
+    }
+
 }
 
 section {
     margin: 0 auto;
     max-width: 1440px; 
-}
-
-.icon {
-    height: 14px;
-    margin: 0 0 0 5px;
-    padding: 0;
-    padding-top: 7px;    
+    //border: 1px solid $green;
 }
 
 .shopBy {
@@ -62,12 +66,6 @@ section {
     & > div {
         width: 33,3%;
         margin: 0 20px;
-    }
-    & > div:nth-child(3) {
-        margin-right: 0;
-    }
-    & > div:nth-child(1) {
-        margin-left: 0;
     }
     p {
         font-weight: 600;
@@ -86,28 +84,44 @@ section {
     }
 }
 
+
 .bestSellers, .shopByLink {
     font-size: 16px;
-    color: $lime;
+    color: $green;
     display: flex;
     cursor: pointer;
 }
 .shopByLink {
     color: #03424C;
     font-size: 20px;
-
 }
 .bestSellers img {
     height: 10px;
 }
 
 .shopProcessSection {
-    background: $lightLime;
+    display: block;
+    background: $dark-violet;
     min-width: 100%;
-
+    color: white;
+    margin-top: 80px;
 }
 .shopProcessWrap {
-    margin: 0 auto;
+    margin: 30px auto;
+    padding: 58px;
     max-width: 1440px; 
     display: flex;
+    justify-content: space-between;
+    h2 {
+        font-family: $serif-font-family;
+        font-weight: 700;
+        font-size: 30px;
+        //letter-spacing: .01em;
+    }
+    div {
+        width: 48%;
+    }
+    a {
+        color: white;
+    }
 }
