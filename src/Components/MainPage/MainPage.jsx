@@ -9,7 +9,7 @@ import shopKids from './../../assets/mainPage/kids_eyewear.webp';
 import shopMen from './../../assets/mainPage/man-optic-shop.jpg';
 import { Link } from 'react-router-dom';
 import { AngleIcon } from '../../assets/icons/AngleIcon';
-import { Footer } from '../Footer/Footer';
+import { Footer } from '../Footer/Footer.jsx';
 import { SubscribeForm } from './SubscribeForm/SubscribeForm';
 import { BestSellers } from './BestSellers/BestSellers';
 
@@ -75,7 +75,7 @@ export const MainPage = () => {
                 <h2>Женские очки</h2>
                 <div className={c.bestSellers}>
                     <span>Бестселлеры</span>
-                    <AngleIcon color={'#11A834'} size={10} margin={'6px auto auto 4px'} />
+                    <AngleIcon color={'#11A834'} size={14} margin={'6px auto auto 4px'} />
                 </div>
             </div>
 
@@ -121,7 +121,7 @@ export const MainPage = () => {
                         Наши цены стартуют с 1 999 руб. для оправы с простыми линзами. Однако в нашем арсенале - очень интересные варианты УФ-блокирующих, рецептурных, гибких и безопасных детских очков.
                     </p>
                     <p>
-                        Выберите понравившиеся модели на сайте и к Вашему приезду в магазин мы подготовим их для максимально комфортного и быстрого процесса выбора.
+                        Выберите понравившиеся модели на сайте и к Вашему приезду в магазин мы подготовим их для максимально комфортного процесса примерки.
                         После быстрого изготовления (до трёх дней) курьер доставит готовую оправу по удобному Вам адресу.
                     </p>
                 </div>
@@ -129,10 +129,10 @@ export const MainPage = () => {
         </section>
 
         <BestSellers />
-        <section>
+        {/* <section>
 
-        </section>
+        </section> */}
 
-        <Footer />
+        {/* <Footer /> */}
     </>
 }

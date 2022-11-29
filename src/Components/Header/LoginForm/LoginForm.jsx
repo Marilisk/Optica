@@ -1,52 +1,61 @@
 import c from './LoginForm.module.scss';
-import { useState } from 'react';
 import { CustomCheckbox } from '../../../assets/form_elements/CustomCheckbox/CustomCheckbox';
-//import { useDispatch } from 'react-redux';
+import { Field, Form, Formik } from 'formik';
+import { fetchAuth } from '../../../redux/authSlice';
+import { validateEmail, validatePassword } from './loginValidate';
 
 
-export const LoginForm = () => {
-    //const dispatch = useDispatch();
-    
+export const LoginForm = ({ toggleLoginModalOpened, dispatch }) => {
 
-    const [loginData, setLoginData] = useState({
-        email: '',
-        password: '',
-        rememberMe: false,
-    });
+    return <Formik initialValues={{
+        email: '6868221@gmail.com',
+        password: 'Zxcewq187',
+        rememberMe: true,
+    }}
+        onSubmit={async (values, actions) => {
+            const payload = { email: values.email, password: values.password };
+            const data = await dispatch(fetchAuth(payload));
+            if (!data.payload) {
+                alert('не удалось авторизоваться');
+            }
+            if ('token' in data.payload) {
+                window.localStorage.setItem('token', data.payload.token);
+                actions.resetForm({
+                    email: '',
+                    password: '',
+                    rememberMe: true,
+                })
+                toggleLoginModalOpened();
+            }
+        }}
+    >
 
-    const handleSubmit = () => {
-        console.log(loginData);
-    }
-   
-    return <div className={c.wrap}>
-        <form onSubmit={handleSubmit}>
-            <input name='email'
-                type='text'
-                value={loginData.email}
-                placeholder='e-mail'
-                onChange={(e) => setLoginData({ ...loginData, email: e.currentTarget.value })}
-            />
-            <input name='password'
-                type='password'
-                value={loginData.password}
-                placeholder='пароль'
-                onChange={(e) => setLoginData({ ...loginData, password: e.currentTarget.value })}
-            />
+        {({ errors, touched }) => (
+            <Form >
+                <div className={c.wrap}>
 
-            <button type='submit'>
-                 ВОЙТИ
-            </button>
+                    <Field id='email' name='email' placeholder='email' validate={validateEmail}
+                        style={errors.email && { borderColor: '#FF0000' }} />
+                    {errors.email && touched.email && <p className={c.error}>{errors.email}</p>}
 
-            <div className={c.underBtn}>
-                <CustomCheckbox rememberMe={loginData.rememberMe}
-                    onChange={(value) => setLoginData({ ...loginData, rememberMe: value })} />
-            <span>забыли пароль?</span>    
-            </div>
-            
+                    <Field id="password" /* type="password" */ name="password" placeholder='пароль' validate={validatePassword}
+                        style={errors.password && { borderColor: '#FF0000' }} />
+                    {errors.password && touched.password && <p className={c.errorPassword}>{errors.password}</p>}
 
-        </form>
-       
+                    <button type='submit'>
+                        ВОЙТИ
+                    </button>
 
-    </div>
+                    <div className={c.underBtn}>
+                        <Field type='checkbox' name='rememberMe' component={CustomCheckbox} />
+                        <label htmlFor='rememberMe'>запомнить меня</label>
+                        <span>забыли пароль?</span>
+                    </div>
 
+                </div>
+            </Form>
+
+        )}
+
+    </Formik>
 }

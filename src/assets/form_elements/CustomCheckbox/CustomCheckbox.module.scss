@@ -1,5 +1,6 @@
 $lime: #64E80C;
 $lightLime: #90EC53;
+$green: #11A834;
 $violet: #95009C;
 $thin-gray-border: 1px solid #D8D1CA;
 $light-beige-gray: #D8D1CA;
@@ -9,26 +10,27 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 
 
-.wrap,
+.checkWrap,
 .checked {
-    //display: inline-flex;
+    height: 30px;
+    width: 30px;
+    //display: flex;
+    //border: 1px solid pink;
+    
+    /* label {
+        display: inline-block;
+        width: 260px;
+        margin: 2px auto auto 10px;  
+    } */
 
-    label {
-        //border: 1px solid rebeccapurple;
-        
-        display: inline;
-        //width: 200px;
-        //height: 40px;
-    }
-
-    input {        
+    input {
         width: 20px;
         height: 20px;
         margin: 0;
         margin-right: 6px;
         position: relative;
         visibility: hidden;
-
+        
         &::before {
             position: absolute;
             content: '';
@@ -36,28 +38,21 @@ $light-background: #FAFAFA;
             width: 20px;
             height: 20px;
             visibility: visible;
+            margin: 0;
             margin-top: 2px;
-            
         }
     }
 }
 
 .checked {
-
     input {
         &::before {
             position: absolute;
             content: '';
-            //border: 1px solid #AAAAAA;
-            //width: 20px;
-            //height: 20px;
-            //visibility: visible;
             background-image: url('./check.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 80% 80%;
-
         }
     }
-
 }

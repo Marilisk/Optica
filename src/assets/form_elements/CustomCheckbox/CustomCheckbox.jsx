@@ -1,20 +1,14 @@
 import c from './CustomCheckbox.module.scss';
 
 
+export const CustomCheckbox = ({ field }) => {
+    
+    return <div className={field.checked ? c.checked : c.checkWrap}>
 
-export const CustomCheckbox = ({rememberMe, onChange }) => {
-
-    return <div className={rememberMe ? c.checked : c.wrap }>
-       
-       
-            <input name='rememberMe'
-                id='rememberMe'
-                type='checkbox'
-                value={rememberMe}
-                className={c.checkBx}
-                onChange={onChange /* () => onChange(!rememberMe) */} />
-            <label htmlFor='rememberMe'>Запомнить меня</label>
+        <input {...field} 
+            id='rememberMe'
+            type='checkbox'
+           /*  className={c.checkBx} */ />
+        {/* <label htmlFor='rememberMe'>Запомнить меня</label> */}
     </div>
-
-
 }

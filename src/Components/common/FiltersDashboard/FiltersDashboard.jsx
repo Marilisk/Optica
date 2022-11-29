@@ -5,8 +5,7 @@ import smallCross from './../../../assets/icons/smallCross.svg';
 import { useState } from 'react';
 
 
-export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
-
+export const FiltersDashboard = ({ features, onSelectFeature }) => {
 
     const [filterOpened, toggleFilterOpened] = useState(null);
     const onHover = (filterId) => {
@@ -14,19 +13,19 @@ export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
     }
 
     return <>
-        <section className={c.menuBar}>
+        <div className={c.menuBar}>
             <div className={c.filters}>
                 <div className={c.selectedfilters}>
                     100 товаров:
-                    {filterOptions.filter(elem => elem.isSelected).map(elem => {
+                    {features.filter(elem => elem.isSelected).map(elem => {
                         return <div key={elem.id}>
-                            {elem.name}: {elem.chosenOptions.map(el => <span>{el} <img alt='' src={smallCross} onClick={() => selectFilter(elem.id, el)} /> </span>)}
+                            {elem.name}: {elem.chosenOptions.map(el => <span>{el} <img alt='' src={smallCross} onClick={() => onSelectFeature(elem.id, el)} /> </span>)}
                         </div>
                     })}
                 </div>
 
                 <div className={c.filtersOptions}>
-                    {filterOptions.map(elem => {
+                    {features.map(elem => {
                         return <div key={elem.name} className={filterOpened === elem.id ? c.filterName : c.otherFilterName} onMouseOver={() => onHover(elem.id)} onMouseLeave={() => onHover(null)} >
                             {elem.name} <img alt='' src={filterOpened === elem.id ? sortUpIcon : sortDownIcon} />
                             <div key={elem.name + 'd'} className={c.filterMenu}>
@@ -39,7 +38,7 @@ export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
                                                     value={el}
                                                     name={'checkbox'}
                                                     checked={elem.chosenOptions.find(it => it === el)}
-                                                    onChange={() => selectFilter(elem.id, el)} />
+                                                    onChange={() => onSelectFeature(elem.id, el)} />
                                                 {el}
                                             </label>
                                         </div>
@@ -50,14 +49,14 @@ export const FiltersDashboard = ({ filterOptions, selectFilter }) => {
                     })}
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section className={c.sortBoard}>
+        <div className={c.sortBoard}>
             <div></div>
             <div></div>
             <div></div>
 
-        </section>
+        </div>
 
 
         <div></div>

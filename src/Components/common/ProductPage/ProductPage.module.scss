@@ -1,0 +1,86 @@
+$background-gray: #FAFAFA;
+$thin-gray-border: 1px solid #D8D1CA;
+$light-beige-gray: #D8D1CA;
+$lime: #64E80C;
+$dark-fontcolor: #333333;
+$gray-fontcolor: #666666;
+$small-fontSize: 14px;
+$light-background: #FAFAFA;
+
+.wrap {
+    background: white;
+    //position: relative;
+    z-index: -1;
+    
+    &:hover {
+        box-shadow: 2px 2px 18px 3px #DADADA;
+        transition: all 700ms;
+        //z-index: 1;
+        /* border: 1px solid red; */
+    }
+    
+}
+.priceWrapper {
+    display: flex;
+    background: white;
+    padding: 2%;
+}
+
+.price {
+    font-size: 48px;
+    font-weight: 200;
+
+}
+.priceIncludes {
+    font-size: $small-fontSize;
+    p {
+        margin-left: 16%;
+        span {
+            font-weight: 700;
+        }
+    }
+    li {
+        list-style: none;
+    }
+    
+    li::before {
+        content: '\2713';
+        margin-right: 4px;
+    }
+    
+}
+.mainPhoto {
+    width: 400px;
+    //border: 1px solid red;
+}
+
+.flexWrapper {
+    display: flex;
+}
+.leftPart {
+    min-width: 50%;
+
+    img {
+        width: 70%;
+        margin: 0 auto;
+        display: block;
+        border: 1px solid red;
+    }
+}
+.rightPart {
+    background: #FAFAFA;
+    width: 100%;
+    padding: 30px;
+
+    border-left: $thin-gray-border;
+
+    h2 {
+        font-size: 22px;
+        margin: 0 auto 2% 0;
+    }
+}
+
+.editBlock {
+    background: $light-beige-gray;
+}
+

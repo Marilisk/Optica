@@ -1,17 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import categoriesSlice from "./categoriesSlice";
-import filtersSlice from "./filtersSlice";
+import featuresSlice from "./featuresSlice";
 import headerSlice from "./headerSlice";
-import loginSlice from "./loginSlice";
+import authSlice from "./authSlice";
 import productsSlice from "./productsSlice";
 
 
 export default configureStore({
     reducer: {
         header: headerSlice,
-        filters: filtersSlice,
+        features: featuresSlice,
         products: productsSlice,
         categories: categoriesSlice,
-        login: loginSlice,
+        auth: authSlice,
     },
 })

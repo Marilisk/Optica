@@ -1,9 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import instance from "./API/api";
 
-const filtersSlice = createSlice({
-    name: 'filters',
+export const fetchFeatures = createAsyncThunk('products/fetchFeatures', async () => {
+    const { data } = await instance.get('/features');
+    return data;
+})
+
+const featuresSlice = createSlice({
+    name: 'features',
     initialState: {
-        filterOptions: [
+        features: [
             {
                 id: 1,
                 name: 'Оптическая сила',
@@ -59,23 +65,38 @@ const filtersSlice = createSlice({
 
     },
     reducers: {
-        onSelectFilter(state, action) {
-            const item = state.filterOptions.find((el) => el.id === action.payload.filter);
+        onSelectFeature(state, action) {
+            const item = state.features.find((el) => el.id === action.payload.feature);
             let isOptionChosen = item.chosenOptions.includes(action.payload.option);
             if (isOptionChosen) {
                 console.log([...item.chosenOptions]);
-                item.chosenOptions = item.chosenOptions.filter(chosenOption => chosenOption !== action.payload.option);
+                item.chosenOptions = item.chosenOptions.feature(chosenOption => chosenOption !== action.payload.option);
                 item.options.push(action.payload.option);
                 item.isSelected = item.chosenOptions.length;
             } else {
                 item.chosenOptions.push(action.payload.option);
-                item.options = item.options.filter(opt => opt !== action.payload.option);
+                item.options = item.options.feature(opt => opt !== action.payload.option);
                 item.isSelected = item.chosenOptions.length;
             }
         },
 
+      /*   extraReducers: (builder) => {
+            builder.addCase( fetchFeatures.pending, (state, action) => {
+                state.features.items = [];
+                state.features.status = 'loading';
+            })
+            .addCase(fetchFeatures.fulfilled, (state, action) => {
+                state.features.items = action.payload;
+                state.features.status = 'loaded';
+            })
+            .addCase(fetchFeatures.rejected, (state, action) => {
+                state.features.items = [];
+                state.features.status = 'error';
+            })
+        }, */
+
     }
 })
 
-export const { onSelectFilter } = filtersSlice.actions;
-export default filtersSlice.reducer;
+export const { onSelectFeature } = featuresSlice.actions;
+export default featuresSlice.reducer;

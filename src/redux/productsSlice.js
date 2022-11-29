@@ -1,96 +1,101 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import instance from "./API/api.js";
+
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+    const { data } = await instance.get('/products');
+    return data;
+});
+export const fetchProd = createAsyncThunk('products/fetchProd', async (id) => { 
+    const data = await instance.get(`/products/${id}`);
+    return data.data;
+});
+export const fetchDeleteProd = createAsyncThunk('products/fetchDeleteProd', async (id) => {
+    const data = await instance.delete(`/products/` + id);
+    console.log(data);
+    if (data.data.success === 'true') {
+
+    }
+    return {data: data.data, id};
+});
+
 
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        items: [
-            {
-                id: 1,
-                name: 'Очки',
-                price: 5000,
-                features: ['bestSeller'],
-                buyCount: 1,
-                options: ['чёрный', 'красный'],
-                photos: ['https://static.zennioptical.com/production/products/general/44/19/4419623-eyeglasses-front-view.jpg?im=Resize=(500)',],
-            },
-            {
-                id: 2,
-                name: 'Очки',
-                price: 4000,
-                features: ['bestSeller'],
-                buyCount: 1,
-                options: [],
-                photos: ['https://static.zennioptical.com/production/products/general/32/17/3217321-eyeglasses-front-view.jpg?im=Resize=(500)'],
-            },
-            {
-                id: 3,
-                name: 'Очки',
-                price: 3000,
-                features: ['bestSeller'],
-                buyCount: 1,
-                options: ['чёрный', 'красный'],
-                photos: ['https://static.zennioptical.com/production/products/general/20/31/2031517-eyeglasses-front-view.jpg?im=Resize=(500)'],
-            },
-            {
-                id: 4,
-                name: 'Очки',
-                price: 5000,
-                features: ['bestSeller'],
-                buyCount: 1,
-                options: ['чёрный', 'красный'],
-                photos: ['https://static.zennioptical.com/production/products/general/78/13/7813125-eyeglasses-front-view.jpg?im=Resize=(500)'],
-            },
-            {
-                id: 5,
-                name: 'Очки',
-                price: 5000,
-                features: [],
-                options: ['чёрный', 'красный'],
-                photos: [],
-            },
-            {
-                id: 6,
-                name: 'Очки',
-                price: 5000,
-                features: ['bestSeller',],
-                options: ['чёрный', 'красный'],
-                photos: [],
-            },
-            {
-                id: 7,
-                name: 'Очки',
-                price: 5000,
-                features: [],
-                options: ['чёрный', 'красный'],
-                photos: [],
-            },
-            {
-                id: 8,
-                name: 'Очки',
-                price: 5000,
-                features: [],
-                options: ['чёрный', 'красный'],
-                photos: [],
-            },
-            {
-                id: 9,
-                name: 'Prada',
-                price: 5000,
-                features: [],
-                options: ['чёрный', 'красный'],
-                photos: [],
-            },
-        ],
-
+        products: {
+            items: [ ],
+            status: 'loading',
+        },
+    
+        currentProduct: {item: null, status: 'loading' },
+        tags: {
+            items: [],
+            status: 'loading',
+        },
+        bestsellersPortion: 0,
     },
     reducers: {
         onAddToCart(state, action) {
             //const item = state.items.find(el => el.id === action.payload.item);
-                   
         },
-        
-    }
+        anotherBestsellers(state, action) {
+            state.bestsellersPortion = action.payload ?
+                ++state.bestsellersPortion
+                : --state.bestsellersPortion;
+        },
+        setCurrentProd(state, action) {
+            //console.log(action);
+            state.currentProduct.item = action.payload;
+            state.currentProduct.status = 'loaded';
+        },
+
+    },
+    extraReducers: (builder) => {
+        builder.addCase( fetchProducts.pending, (state, action) => {
+            state.products.items = [];
+            state.products.status = 'loading';
+        })
+        .addCase(fetchProducts.fulfilled, (state, action) => {
+            state.products.items = action.payload;
+            state.products.status = 'loaded';
+        })
+        .addCase(fetchProducts.rejected, (state, action) => {
+            state.products.items = [];
+            state.products.status = 'error';
+        })
+
+
+        .addCase(fetchDeleteProd.pending, (state) => {
+            state.products.status = 'loading';
+        })
+        .addCase(fetchDeleteProd.fulfilled, (state, action) => {
+            state.products.items = state.products.items.filter( prod => prod.id !== action.payload );
+            state.currentProduct.status = 'loaded';
+        })
+        .addCase(fetchDeleteProd.rejected, (state) => {
+            state.products.status = 'loaded';
+        })
+
+
+        .addCase(fetchProd.pending, (state, action) => {
+            //state.currentProduct.item = {};
+            state.currentProduct.status = 'loading';
+        })
+        .addCase(fetchProd.fulfilled, (state, action) => {
+            state.currentProduct.item = action.payload;
+            state.currentProduct.status = 'loaded';
+        })
+        .addCase(fetchProd.rejected, (state, action) => {
+            //state.currentProduct.item = {};
+            state.currentProduct.status = 'error';
+        })
+    },
 })
 
-export const { onAddToCart } = productsSlice.actions;
+export const {
+    onAddToCart,
+    anotherBestsellers,
+    setCurrentProd,    
+} = productsSlice.actions;
+
 export default productsSlice.reducer;

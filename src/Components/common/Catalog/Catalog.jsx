@@ -1,13 +1,14 @@
 import c from './Catalog.module.scss';
-import { useSelector } from 'react-redux';
 import { ProductCard } from '../ProductCard/ProductCard';
 
 
-export const Catalog = () => {
-    const products = useSelector(state => state.products.items);
+export const Catalog = ({dispatch, products, areProdsLoading}) => {
     
-    return <section className={c.catGrid}>
-        {products.map(product => <ProductCard key={product.id} product={product} />)}
+    if (areProdsLoading) {
+        return false;
+    }
+    return <div className={c.catGrid}>
+        {products.map(product => <ProductCard key={product._id} product={product} dispatch={dispatch} />)}
 
-    </section>
+    </div>
 }

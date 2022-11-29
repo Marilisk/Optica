@@ -60,7 +60,7 @@ export const Header = () => {
                         <p>Магазин</p>
                     </div>
                     <LoginButton toggleLoginModalOpened={(value) => dispatch(toggleLoginModalOpened(value))}
-                        loginModalOpened={loginModalOpened} />
+                        loginModalOpened={loginModalOpened} dispatch={dispatch} />
                     <div className={c.menuItem}>
                         <img alt='' src={heart} />
                         <p>Избранное</p>

@@ -1,11 +1,12 @@
-//import c from './Icon.module.scss';
+import c from './Icon.module.scss';
 
 
-export const AngleIcon = ({ color, size, margin }) => {
+export const AngleIcon = ({ color, size, margin, transform, showAnother }) => {
 
     return <>
-        <svg style={{margin: `${margin}`}}  
+        <svg style={{margin: `${margin}`, transform: `${transform}`}}  
              fill={color} 
+             onClick={()=> showAnother() }
              width={size} height={size}
              xmlns="http://www.w3.org/2000/svg" 
              id="Bold" viewBox="0 0 24 24" >

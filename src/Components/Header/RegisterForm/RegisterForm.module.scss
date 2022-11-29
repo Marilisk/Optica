@@ -13,14 +13,13 @@ $serif-font-family: 'Playfair Display SC', serif;
 
 .wrap {
     margin: 0 auto;
-    width: 350px;
+    width: 100%;
     position: relative;
-    //z-index: 2;
-
+   
     input {
         margin: 0 auto;
-        margin-bottom: 1.3em;
-        width: 328px;
+        margin-bottom: 1.6em;
+        width: 100%;
         height: 50px;
         border: $thin-gray-border;
         font-style: italic;
@@ -29,17 +28,26 @@ $serif-font-family: 'Playfair Display SC', serif;
         padding-left: 20px;
         box-sizing: padding-box;
         font-size: 14px;
+        position: relative;
 
         &:focus {
             outline: none;
-            border: 2px solid $violet;
+            border: 1px solid $green;
         }
     }
+    .fullNameIcon, .emailIcon, .passwordIcon {
+        position: absolute;
+        top: 18px;
+        right: 16px;
+        width: 14px;
+    }
+    .emailIcon { top: 91px; }
+    .passwordIcon { top: 164px; }
 
     button {
-        width: 350px;
+        width: 100%;
         background: $green;
-        border: 2px solid #17D343;
+        border: 2px solid #6DA579;
         height: 50px;
         color: white;
         font-size: 18px;
@@ -47,40 +55,35 @@ $serif-font-family: 'Playfair Display SC', serif;
         margin-bottom: 1.3em;
         cursor: pointer;
     }
-    
+    .btnEnabled {
+        background: $gray-fontcolor;
+        border-color: $gray-fontcolor;
+        cursor: not-allowed;
+    }
 }
 
 .underBtn {
     display: flex;
-    //justify-content: flex-start;
     margin-bottom: 1.3em;
-    //border: 1px solid hotpink;
-    
-
     span {
         font-style: italic;
         color: $green;
         font-size: 18px;
-        //margin-top: 0px;
     }
     label {
-        //border: 1px solid green;
         margin: 0px auto auto 2px;
-        //width: 200px;
         height: 2em;
-        //display: block;
-        //display: inline-block;
     }
 }
 
-.error, .errorPassword {
+
+.errorEmail,
+.errorPassword, .errorFullname {
     font-size: $small-fontSize;
     position: absolute;
-    top: 40px;
-    color: #FF0000;
+    top: 36px;
+    color: $violet;
     left: 20px;
 }
-.errorPassword {
-    top: 112px;
-    
-}
+.errorEmail { top: 110px; }
+.errorPassword { top: 182px; }

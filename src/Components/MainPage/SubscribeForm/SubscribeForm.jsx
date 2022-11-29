@@ -1,13 +1,13 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { subscribe } from '../../../redux/loginSlice';
+import { subscribe } from '../../../redux/authSlice';
 import c from './SubscribeForm.module.scss';
 
 
 export const SubscribeForm = () => {
     const dispatch = useDispatch();
 
-    const data= useSelector(state => state.login.subscribeData);
+    const data = useSelector(state => state.auth.subscribeData);
     const msg = data.responseMsg;
 
     const formik = useFormik({
@@ -15,8 +15,10 @@ export const SubscribeForm = () => {
             email: data.email,
         },
         enableReinitialize: true,
-        onSubmit: (values) => { 
+        onSubmit: (values, actions) => { 
             dispatch(subscribe(values.email))
+            console.log(actions)
+            actions.resetForm('')
 
         },
     })
