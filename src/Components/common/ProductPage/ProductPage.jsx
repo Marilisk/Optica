@@ -38,7 +38,7 @@ export const ProductPage = () => {
         <div className={c.flexWrapper}>
             <div className={c.leftPart}>
 
-                <img className={c.mainPhoto} src={product.imageUrl.main ? `http://localhost:4444${product.imageUrl.main}` : defaultGlasses} alt='' />
+                <img className={c.mainPhoto} src={product.imageUrl.main ? `${process.env.REACT_APP_API_URL}${product.imageUrl.main}` : defaultGlasses} alt='' />
 
                 
             </div>
