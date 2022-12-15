@@ -6,10 +6,10 @@ import { selectIsAuth, submitLoginForm } from '../../../redux/authSlice';
 import { useState } from 'react';
 import { LoginForm } from '../LoginForm/LoginForm';
 import { RegisterForm } from '../RegisterForm/RegisterForm';
-import { redirect, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
-export const LoginPage = () => {
+export const LoginPage = ({isLoading}) => {
     const isAuth = useSelector(selectIsAuth);
     const [isLoginTab, setIsLoginTab] = useState(false);
 
@@ -17,7 +17,7 @@ export const LoginPage = () => {
 
     useEffect(() => {
         dispatch(setfullHeaderTheme(false))
-    })
+    }, [])
 
     let navigate  = useNavigate();
    
@@ -25,9 +25,11 @@ export const LoginPage = () => {
         dispatch(setfullHeaderTheme(true));
         navigate(-1);
     }
-    /* if (isAuth) {
-        navigate(-1);
-    } */
+    if (isAuth) {
+        //dispatch(setfullHeaderTheme(true)); // когда включено, не работает возврат корректный на страницу товара
+        navigate(-2);   // проверить надо
+
+    }
 
    
     return <div className={c.wrap}>
@@ -40,8 +42,13 @@ export const LoginPage = () => {
             </div>
         </div>
 
-        {isLoginTab ?  <LoginForm dispatch={dispatch} toggleLoginModalOpened={toggleLoginModalOpened} /> :
-             <RegisterForm dispatch={dispatch} toggleLoginModalOpened={toggleLoginModalOpened} /> }
+        {isLoginTab ?  <LoginForm dispatch={dispatch} 
+                                  toggleLoginModalOpened={toggleLoginModalOpened}
+                                  isLoading={isLoading} /> :
+             <RegisterForm dispatch={dispatch} 
+                    toggleLoginModalOpened={toggleLoginModalOpened} 
+                    navigate={navigate}
+                    isLoading={isLoading} /> }
                
     </div>
 

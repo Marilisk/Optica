@@ -1,82 +1,72 @@
 import c from './ProductPage.module.scss';
-import defaultGlasses from './../../../assets/common/defaultGlasses.webp';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDeleteProd, fetchProd } from '../../../redux/productsSlice.js';
-import { selectIsAuth } from '../../../redux/authSlice';
+import { fetchProd } from '../../../redux/productsSlice.js';
+import { selectIsManager } from '../../../redux/authSlice';
 import { BreadCrumbs } from '../BreadCrumbs/BreadCrumbs';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { EyewearSize } from './EyewearSize/EyewearSize';
+import { Photos } from './Photos/Photos';
+import { Heart } from '../../../assets/icons/Heart';
+import { Specifications } from './Specifications/Specifications';
+import { Price } from './Price/Price';
+import { Preloader } from '../../../assets/common/Preloader/Preloader';
+import { CustomerButtons } from './CustomerButtons/CustomerButtons';
 
 
-export const ProductPage = () => {
+export const ProductPage = ({ addToFavorites, removeFromFavorites, userFavorites, isLoading }) => {
     const dispatch = useDispatch();
 
-    const product = useSelector(state => state.products.currentProduct.item);
     const status = useSelector(state => state.products.currentProduct.status);
+    const product = useSelector(state => state.products.currentProduct.item);
 
-    const isAuth = useSelector(selectIsAuth);
-    const userProfile = useSelector(state => state.auth.loginData?.data);
-    
+    const IsManager = useSelector(selectIsManager);
+    //const userId = useSelector(state => state.auth.loginData.data?._id);
+
     const params = useParams();
+    const isFavorite = userFavorites?.includes(params.id);
+
     useEffect(() => {
         dispatch(fetchProd(params.id))
     }, [params.id, dispatch])
 
-    if (status === 'loading') {
-        return <div>loading...</div>;
+    if (status === 'loading' || !product /* || !userFavorites */) {
+        return <Preloader minFormat={true} />;
     }
-    const isOwner = isAuth && userProfile._id === product.user;
-    //console.log(product)
-    const size = product.frameWidth > 139 ? 'большой' 
-        : product.frameWidth > 134 ? 'средний'
-        : product.frameWidth > 127 ? 'маленький'
-        : 'детский';
+
+    //console.log(product);
+
+    const size = product.frameWidth > 139 ? 'большие'
+        : product.frameWidth > 134 ? 'средние'
+            : product.frameWidth > 127 ? 'маленькие'
+                : 'детский';
     const price = product.price.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB' });
 
-    return <div className={c.wrap}>
-        <BreadCrumbs text={`Женские очки. ${product.name} `} />
-        <div className={c.flexWrapper}>
-            <div className={c.leftPart}>
 
-                <img className={c.mainPhoto} src={product.imageUrl.main ? `${process.env.REACT_APP_API_URL}${product.imageUrl.main}` : defaultGlasses} alt='' />
+    return <>
+        <div className={c.wrap}>
+            <BreadCrumbs text={`Женские очки. ${product.name} `} />
+            <div className={c.flexWrapper}>
 
-                
-            </div>
+                <Photos imageUrl={product.imageUrl} />
 
-            <div className={c.rightPart}>
-                <h2>{product.name}</h2>
-                <div className={c.size}>
-                    {size}
+                <div className={c.rightPart}>
+                    <h2>{product.name}</h2>
+
+                    <EyewearSize size={size} />
+                    <Price price={price} />
+
+                    <CustomerButtons isFavorite={isFavorite}
+                                    isLoading={isLoading}
+                                    addToFavorites={addToFavorites}
+                                    removeFromFavorites={removeFromFavorites}
+                                    productId ={product._id}  />
+
                 </div>
-                <div className={c.priceWrapper}>
-
-                    <div  className={c.price}>
-                    {price}
-                    </div>
-
-                    <div className={c.priceIncludes}>
-                        <p>В цену <span>уже</span> включено:</p>
-                        <ul>
-                            <li>высококачественная оправа</li>
-                            <li>базовые рецептупные линзы</li>
-                            <li>укрепляющее порытие</li>
-                            <li>покрытие от ультрафиолета</li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
         </div>
 
-        {isOwner &&
-            <div className={c.editBlock}>
-                <button onClick={() => dispatch(fetchDeleteProd(product._id))}>
-                    Удалить товар
-                </button>
-            </div>
-        }
+        <Specifications product={product} size={size} dispatch={dispatch} IsManager={IsManager} />
 
-
-
-    </div>
+    </>
 }

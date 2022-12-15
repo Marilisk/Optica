@@ -1,19 +1,17 @@
 import c from './RegisterForm.module.scss';
 import { CustomCheckbox } from '../../../assets/form_elements/CustomCheckbox/CustomCheckbox';
-import { useDispatch, useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
 import { fetchRegister, selectIsAuth } from '../../../redux/authSlice';
 import { validateEmail, validatePassword, validateFullName } from '../LoginForm/loginValidate';
-import { redirect } from 'react-router-dom';
 import snowFlake from './../../../assets/icons/snowflake.png';
 import errorInput from './../../../assets/icons/errorInput.png';
 import check from './../../../assets/icons/check.png';
 
 
-export const RegisterForm = ({dispatch, toggleLoginModalOpened}) => {
-    const isAuth = useSelector(selectIsAuth);
+export const RegisterForm = ({dispatch, toggleLoginModalOpened, isLoading, /* navigate */}) => {
+     
     
-
     return <Formik initialValues={{
         fullName: '',
         email: '',
@@ -22,12 +20,12 @@ export const RegisterForm = ({dispatch, toggleLoginModalOpened}) => {
     }}
         onSubmit={async (values, actions) => {
             const payload = { email: values.email, password: values.password, fullName: values.fullName };
-            const data = await dispatch(fetchRegister(payload));
-            if (!data.payload) {
-                alert('не удалось зарегистрироваться');
-            }
-            if ('token' in data.payload) {
-                window.localStorage.setItem('token', data.payload.token);
+            const response = await dispatch(fetchRegister(payload));
+            //console.log(response);
+            if (!response.payload) {
+                alert(response.error.message);
+            } else if ('email' in response.payload) {
+                //window.localStorage.setItem('token', response.data.accessToken);
                 actions.resetForm({
                     fullName: '',
                     email: '',
@@ -68,7 +66,8 @@ export const RegisterForm = ({dispatch, toggleLoginModalOpened}) => {
                         className={c.passwordIcon} />
 
                     <button type='submit' 
-                            className={(errors.fullName|| errors.email || errors.password) && c.btnEnabled}>
+                            className={(errors.fullName|| errors.email || errors.password || isLoading === 'loading') ?
+                                c.btnEnabled : null}>
                         ЗАРЕГИСТРИРОВАТЬСЯ
                     </button>
 

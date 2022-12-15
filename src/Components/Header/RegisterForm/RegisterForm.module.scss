@@ -1,4 +1,4 @@
-$lime: #64E80C;
+$dark-violet: #64E80C;
 $violet: #95009C;
 $thin-gray-border: 1px solid #D8D1CA;
 $green: #11A834;
@@ -46,8 +46,8 @@ $serif-font-family: 'Playfair Display SC', serif;
 
     button {
         width: 100%;
-        background: $green;
-        border: 2px solid #6DA579;
+        background: $violet;
+        border: 2px solid $violet;
         height: 50px;
         color: white;
         font-size: 18px;
@@ -55,7 +55,7 @@ $serif-font-family: 'Playfair Display SC', serif;
         margin-bottom: 1.3em;
         cursor: pointer;
     }
-    .btnEnabled {
+    .btnEnabled, &:disabled {
         background: $gray-fontcolor;
         border-color: $gray-fontcolor;
         cursor: not-allowed;

@@ -7,8 +7,6 @@ export const CustomCheckbox = ({ field }) => {
 
         <input {...field} 
             id='rememberMe'
-            type='checkbox'
-           /*  className={c.checkBx} */ />
-        {/* <label htmlFor='rememberMe'>Запомнить меня</label> */}
+            type='checkbox' />
     </div>
 }

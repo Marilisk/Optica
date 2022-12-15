@@ -1,17 +1,19 @@
 import c from './Header.module.scss';
-import logo from './../../assets/header/lime-logo.png';
+import logo from './../../assets/header/full-violet-logo.png';
 import shopLocation from './../../assets/header/icons/shopLocation.svg';
-import heart from './../../assets/header/icons/heart.svg';
+import { Heart } from './../../assets/icons/Heart.jsx';
 import cart from './../../assets/header/icons/cart.svg';
 import { NavLink } from 'react-router-dom';
 import { LoginButton } from './LoginButton/LoginButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleLoginModalOpened, toggleMenuOpened } from '../../redux/headerSlice';
+import { setfullHeaderTheme, toggleLoginModalOpened, toggleMenuOpened } from '../../redux/headerSlice';
+import { MobileHeader } from './MobileHeader';
+import { MenuOptions } from './MenuOptions/MenuOptions';
 
 
-export const Header = () => {
+export const Header = ({fullHeader, favoritesCount}) => {
+
     const dispatch = useDispatch();
-    const fullHeader = useSelector(state => state.header.fullHeader);
     const menuOpened = useSelector(state => state.header.menuOpened);
     const loginModalOpened = useSelector(state => state.header.loginModalOpened);
     const mainMenu = useSelector(state => state.header.mainMenu);
@@ -20,60 +22,73 @@ export const Header = () => {
         return <div key={btn.name} className={c.navLinkWrap}
             onMouseOver={() => dispatch(toggleMenuOpened(btn.name))}
             onMouseLeave={() => dispatch(toggleMenuOpened(null))} >
-            <NavLink to={btn.url}>
+
+            
                 <div className={c.navItem}>
 
-                    <span>{btn.name}</span>
+                <NavLink to={btn.url}><span>{btn.name}</span></NavLink>
                     {menuOpened === btn.name &&
                         <div className={c.accordeon}>
-                            one
-                            two
-
+                            <MenuOptions url={btn.url} />
                         </div>
                     }
                 </div>
-            </NavLink>
+            
         </div>
     })
 
 
-    return <div className={c.mainWrapper} style={fullHeader ? null : { border: 'none' }} >
+    return <>
+        <MobileHeader mainMenu={mainMenu}
+            toggleLoginModalOpened={(value) => dispatch(toggleLoginModalOpened(value))}
+            loginModalOpened={loginModalOpened} 
+            dispatch={dispatch} />
 
-        <div className={c.logoWrap} style={fullHeader ? null : {border: 'none'}}>
-            <NavLink to={`/`}>
-                <img src={logo} alt="" className={c.logo} />
-            </NavLink>
-        </div>
+        <div className={c.wideWrapper}>
+            <div className={c.mainWrapper} style={fullHeader ? null : { border: 'none' }} >
 
-        {fullHeader &&
-            <div className={c.navWrap}>
-                {menu}
-            </div>
-        }
+                <div onClick={() => dispatch(setfullHeaderTheme(true))} 
+                    className={c.logoWrap} 
+                    style={fullHeader ? null : { border: 'none' }}>
+                    <NavLink to={`/`}>
+                        <img src={logo} alt="" className={c.logo} />
+                    </NavLink>
+                </div>
 
-
-        <div className={c.menuWrap}>
-            {fullHeader &&
-                <>
-                    <div className={c.menuItem}>
-                        <img alt='' src={shopLocation} />
-                        <p>Магазин</p>
+                {fullHeader &&
+                    <div className={c.navWrap}>
+                        {menu}
                     </div>
-                    <LoginButton toggleLoginModalOpened={(value) => dispatch(toggleLoginModalOpened(value))}
-                        loginModalOpened={loginModalOpened} dispatch={dispatch} />
-                    <div className={c.menuItem}>
-                        <img alt='' src={heart} />
-                        <p>Избранное</p>
-                    </div> 
-                </>
-            }
+                }
 
 
-            <div className={c.menuItem} style={fullHeader ? null : {border: 'none'}}>
-                <img alt='' src={cart} />
-                {fullHeader && <p>Корзина</p>}
+                <div className={c.menuWrap}>
+                    {fullHeader &&
+                        <>
+                            <div className={c.menuItem}>
+                                <img alt='' src={shopLocation} />
+                                <p>Магазин</p>
+                            </div>
+                            <LoginButton toggleLoginModalOpened={(value) => dispatch(toggleLoginModalOpened(value))}
+                                loginModalOpened={loginModalOpened} dispatch={dispatch} />
+
+                            <div className={c.menuItem} 
+                            style={favoritesCount && {'color': '#57005C'}  }>
+                                <Heart color={favoritesCount ? '#57005C' : '#666666'}  />                                
+                                {favoritesCount && <div className={c.countLabel}>{favoritesCount}</div>}
+                                <p>Избранное</p>
+                            </div>
+                        </>
+                    }
+
+
+                    <div className={c.menuItem} style={fullHeader ? null : { border: 'none' }}>
+                        <img alt='' src={cart} />
+                        {fullHeader && <p>Корзина</p>}
+                    </div>
+                </div>
+
             </div>
         </div>
-
-    </div>
+    </>
 }

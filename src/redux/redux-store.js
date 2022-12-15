@@ -9,7 +9,7 @@ import productsSlice from "./productsSlice";
 export default configureStore({
     reducer: {
         header: headerSlice,
-        features: featuresSlice,
+        filters: featuresSlice,
         products: productsSlice,
         categories: categoriesSlice,
         auth: authSlice,

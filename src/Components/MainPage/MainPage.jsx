@@ -9,11 +9,18 @@ import shopKids from './../../assets/mainPage/kids_eyewear.webp';
 import shopMen from './../../assets/mainPage/man-optic-shop.jpg';
 import { Link } from 'react-router-dom';
 import { AngleIcon } from '../../assets/icons/AngleIcon';
-import { Footer } from '../Footer/Footer.jsx';
 import { SubscribeForm } from './SubscribeForm/SubscribeForm';
 import { BestSellers } from './BestSellers/BestSellers';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchProducts } from '../../redux/productsSlice';
 
 export const MainPage = () => {
+    const dispatch = useDispatch();
+    useEffect( ()=> {
+        //console.log('i m in MainPage UseEffect');
+        dispatch(fetchProducts());
+    }, [dispatch]);
 
     return <>
 
@@ -118,7 +125,7 @@ export const MainPage = () => {
                 <div>
                     <p>
                         Каждый должен иметь доступ к высококлассным и при этом доступным средствам коррекции зрения. Поэтому мы тщательно выбираем актуальные модели оправ и отслеживаем появление новых технологичных линз.
-                        Наши цены стартуют с 1 999 руб. для оправы с простыми линзами. Однако в нашем арсенале - очень интересные варианты УФ-блокирующих, рецептурных, гибких и безопасных детских очков.
+                        Наши цены на оправы с простыми линзами стартуют с 1 999 руб. Однако у нас в ассортименте представлены интересные варианты УФ-блокирующих, рецептурных, гибких и безопасных детских линз.
                     </p>
                     <p>
                         Выберите понравившиеся модели на сайте и к Вашему приезду в магазин мы подготовим их для максимально комфортного процесса примерки.
@@ -129,10 +136,8 @@ export const MainPage = () => {
         </section>
 
         <BestSellers />
-        {/* <section>
+     
 
-        </section> */}
 
-        {/* <Footer /> */}
     </>
 }

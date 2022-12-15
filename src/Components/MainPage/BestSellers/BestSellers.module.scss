@@ -12,6 +12,8 @@ $test-border: 1px solid red;
 
 .mainWrapper {
     margin-top: 120px;
+    //border: 1px solid teal;
+    margin-bottom: 120px;
     h2 {
         font-size: 42px;
         font-family: $serif-font-family;
@@ -30,34 +32,84 @@ $test-border: 1px solid red;
 .galleryWrapper {
     display: flex;
     justify-content: space-evenly;
-    //border: $test-border;
+    /* height: 300px;
+    height: 20vw; */
+    cursor: pointer;
+    //border: 1px solid rebeccapurple;
+    
+
+}
+.itemsWrap, .mobileItemsWrap {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    height: 22vw;
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0 auto;
+    @media (max-width: 533px) {
+        display: none;
+        height: 34vw;
+    }
+
+}
+.mobileItemsWrap {
+    display: none;
+    height: 44vw;
+    //border: 1px solid rebeccapurple;
+    @media (max-width: 533px) {
+        display: block;
+    }
 }
 .item {
-    width: 29%;
+    width: 30%;
     height: 210px;
+    height: 11vw;
     padding: 0;
-    padding-top: 60px;
-    position: relative;
+    padding-top: 4.3vw;
+    padding-top: 4vw;
+    //border: 1px solid teal;
+    transition: all 400ms;
+    position: absolute;
+    left: 200vw;
+    top: 10px;
+    
     &:hover {
-        box-shadow: 2px 2px 18px 3px #DADADA;
-        transition: all 700ms;
+        padding-top: 3.9vw;
     }
     img {
         width: 80%;
+        //border: 1px solid greenyellow;
         margin: 0 auto;
         display: block;
+    }
+    @media (max-width: 533px) {
+        width: 100%;
     }
 }
 
 .price {
-    position: absolute;
     bottom: 10px;
     left: 38%;
-    //display: inline-block;
-    //text-align: center;
+    text-align: center;
+    @media (max-width: 533px) {
+        font-size: 16px;
+    }
 }
+.angleWrap {
+    margin: 0;
+    @media (max-width: 533px) {
+        display: none;
+    }
+}
+.mobileAngleWrap {
+    display: none;
+    @media (max-width: 533px) {
+        display: inline-block;
+        //border: 1px solid greenyellow;
+    }
 
-
+}
 @media only screen and (max-width : 1680px) {}
 @media only screen and (max-width : 1366px) {}
 @media only screen and (max-width : 1280px) {}

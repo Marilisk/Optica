@@ -4,28 +4,29 @@ import { Field, Form, Formik } from 'formik';
 import { fetchAuth } from '../../../redux/authSlice';
 import { validateEmail, validatePassword } from './loginValidate';
 
-
-export const LoginForm = ({ toggleLoginModalOpened, dispatch }) => {
+export const LoginForm = ({ toggleLoginModalOpened, dispatch, isLoading }) => {
 
     return <Formik initialValues={{
         email: '6868221@gmail.com',
-        password: 'Zxcewq187',
+        password: '123456',
         rememberMe: true,
     }}
         onSubmit={async (values, actions) => {
             const payload = { email: values.email, password: values.password };
             const data = await dispatch(fetchAuth(payload));
-            if (!data.payload) {
-                alert('не удалось авторизоваться');
-            }
-            if ('token' in data.payload) {
-                window.localStorage.setItem('token', data.payload.token);
+            console.log(data);
+            
+            if (!data.payload && data.error.message === 'Request failed with status code 404') {
+                alert('неверный логин или пароль');
+            } else if ('accessToken' in data.payload) {
                 actions.resetForm({
                     email: '',
                     password: '',
                     rememberMe: true,
                 })
                 toggleLoginModalOpened();
+            } else {
+                alert('ошибка авторизации');
             }
         }}
     >
@@ -38,11 +39,11 @@ export const LoginForm = ({ toggleLoginModalOpened, dispatch }) => {
                         style={errors.email && { borderColor: '#FF0000' }} />
                     {errors.email && touched.email && <p className={c.error}>{errors.email}</p>}
 
-                    <Field id="password" /* type="password" */ name="password" placeholder='пароль' validate={validatePassword}
+                    <Field id="password" type="password" name="password" placeholder='пароль' validate={validatePassword}
                         style={errors.password && { borderColor: '#FF0000' }} />
                     {errors.password && touched.password && <p className={c.errorPassword}>{errors.password}</p>}
 
-                    <button type='submit'>
+                    <button type='submit' disabled={isLoading === 'loading' || (errors.email || errors.password) }>
                         ВОЙТИ
                     </button>
 

@@ -1,54 +1,64 @@
 import { Field, FieldArray, Form, Formik } from 'formik';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { Preloader } from '../../../assets/common/Preloader/Preloader';
 import instance from '../../../redux/API/api';
+import { fetchProd } from '../../../redux/productsSlice';
+import { CreateFieldArray, createFieldArray } from './createFieldArray';
 import c from './Administration.module.scss';
 import { FilesDownloader } from './FilesDownLoader';
+import { initValues } from './initvalues';
 
-export const Administration = () => {
+export const Administration = ({ }) => {
+    const dispatch = useDispatch();
+    const params = useParams();
 
-    const [images, setImages] = useState({ main: '', side: '', perspective: '' });
+
     const [successmsg, setSuccessMsg] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (params.id) {
+            dispatch(fetchProd(params.id));
+        }
+    }, [params.id]);
 
-    return <>
+    const currentProduct = useSelector(state => state.products.currentProduct);
+    const editMode = Boolean(params.id);
+    //console.log(currentProduct)
+    //console.log('editMode ' + editMode);
+
+    const [images, setImages] = useState(editMode ? currentProduct.item?.imageUrl : { main: '', side: '', perspective: '' });
+
+    if (editMode && !currentProduct.item) {
+        return <div><Preloader /></div>
+    }
+
+    const initialValues = initValues(editMode, currentProduct, images);
+
+    return <section>
+        <div className={c.header}>
+            <h2>{editMode ? 'Редактирование товара' : 'Новый товар'}</h2>
+        </div>
+
         <div className={c.adminWrapper}>
             <div className={c.formikWrapper}>
-                <Formik initialValues={{
-                    category: 'eyewear',
-                    name: 'очки красивые тестовые',
-                    code: 12345,
-                    description: 'отличные очки',
-                    price: 0,
-                    features: [],
-                    options: [],
-                    viewsCount: 0,
-                    buyCount: 0,
-                    shape: 'oval',
-                    pupillaryDistance: '58-72',
-                    frameWidth: 138,
-                    lensWidth: 50,
-                    bridge: 19,
-                    templeLength: 143,
-                    lensHeight: 39,
-                    weight: 8,
-                    material: 'пластик',
-                    prescriptionMin: '-20.00',
-                    prescriptionMax: '12.00',
-                    imageUrl: images,
-                }}
+                <Formik initialValues={initialValues}
                     enableReinitialize={true}
                     onSubmit={async (values, actions) => {
-                        console.log('formik on submit');
-                        
                         try {
-                            const {data} = await instance.post('/products', values);                            
+                            const { data } = editMode ?
+                                await instance.patch(`/products/${params.id}`, values)
+                                : await instance.post('/products', values);
                             const id = data._id;
-                            //navigate(`/product/${id}`);
-                            setSuccessMsg(`успешно загружен товар с id ${id}`);
-                            console.log('response of submit:');
-                            console.log(data);
+                            setSuccessMsg(id);
+                            /* console.log('response of submit:');
+                            console.log(data); */
+                            if (data.success) {
+                                alert('успешно!');
+                                actions.resetForm();
+                            }
                         } catch (error) {
                             console.warn(error);
                             alert('ошибка при загрузке товара');
@@ -87,18 +97,41 @@ export const Administration = () => {
                                     </label>
                                 </div>
 
-                                <div className={c.inputWrapper}>
+                                {/* <div className={c.inputWrapper}>
+                                    <FieldArray name='gender'>
+                                        {({ insert, remove, push }) => (
+                                            <div>Гендер:
+                                                {values.gender.length > 0 &&
+                                                    values.gender.map((gender, index) => (
+                                                        <div key={index}>
+                                                            <label className={c.arrayLabel}>{index + 1}.
+                                                                <Field name={`gender.${index}`} type="text" />
+                                                            </label>
+                                                            <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
+
+                                                        </div>
+                                                    ))}
+                                                <button className={c.btn} type="button" onClick={() => push('')}>добавить поле</button>
+                                            </div>
+                                        )}
+                                    </FieldArray>
+                                </div> */}
+
+                                <CreateFieldArray name='gender'
+                                    array={values.gender}
+                                    title={'Гендер'} />
+
+                                {/* <div className={c.inputWrapper}>
                                     <FieldArray name='features'>
                                         {({ insert, remove, push }) => (
                                             <div>Особенности:
                                                 {values.features.length > 0 &&
                                                     values.features.map((feature, index) => (
                                                         <div key={index}>
-
-                                                            <label>{index+1}.
+                                                            <label className={c.arrayLabel}>{index + 1}.
                                                                 <Field name={`features.${index}`} type="text" />
                                                             </label>
-                                                        <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
+                                                            <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
 
                                                         </div>
                                                     ))}
@@ -106,28 +139,32 @@ export const Administration = () => {
                                             </div>
                                         )}
                                     </FieldArray>
-                                </div>
+                                </div> */}
+                                <CreateFieldArray name='features'
+                                    array={values.features}
+                                    title={'Особенности'} />
 
-                                <div className={c.inputWrapper}>
+                                {/* <div className={c.inputWrapper}>
                                     <FieldArray name='options'>
                                         {({ insert, remove, push }) => (
                                             <div>Опции:
                                                 {values.options.length > 0 &&
                                                     values.options.map((feature, index) => (
                                                         <div key={index}>
-
-                                                            <label>{index+1}.
+                                                            <label className={c.arrayLabel}>{index + 1}.
                                                                 <Field name={`options.${index}`} type="text" />
                                                             </label>
-                                                        <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
-
+                                                            <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
                                                         </div>
                                                     ))}
                                                 <button className={c.btn} type="button" onClick={() => push('')}>добавить поле</button>
                                             </div>
                                         )}
                                     </FieldArray>
-                                </div>
+                                </div> */}
+                                <CreateFieldArray name='options'
+                                    array={values.options}
+                                    title={'Опции'} />
 
                                 <div className={c.inputWrapper}>
                                     <label>количество просмотров
@@ -141,11 +178,23 @@ export const Administration = () => {
                                     </label>
                                 </div>
 
-                                <div className={c.inputWrapper}>
+                                {/* <div className={c.inputWrapper}>
                                     <label>форма
                                         <Field name='shape' />
                                     </label>
-                                </div>
+                                </div> */}
+                                <CreateFieldArray name='shape'
+                                    array={values.shape}
+                                    title={'Форма'} />
+
+                                {/* <div className={c.inputWrapper}>
+                                    <label>цвет
+                                        <Field name='color' />
+                                    </label>
+                                </div> */}
+                                <CreateFieldArray name='color'
+                                    array={values.color}
+                                    title={'Цвет'} />
 
                                 <div className={c.inputWrapper}>
                                     <label>расстояние между зрачками
@@ -189,11 +238,14 @@ export const Administration = () => {
                                     </label>
                                 </div>
 
-                                <div className={c.inputWrapper}>
+                                {/* <div className={c.inputWrapper}>
                                     <label>материал
                                         <Field type='text' name='material' />
                                     </label>
-                                </div>
+                                </div> */}
+                                <CreateFieldArray name='material'
+                                    array={values.material}
+                                    title={'Материал'} />
 
                                 <div className={c.inputWrapper}>
                                     <label>минимальные диоптрии
@@ -207,18 +259,26 @@ export const Administration = () => {
                                     </label>
                                 </div>
 
-                                <button type='submit'>отправить на сервер</button>
+
+                                <button className={c.submitBtn} disabled={currentProduct.isLoading} type='submit'>ОТПРАВИТЬ</button>
+
+                                {successmsg ?
+                                    <NavLink to={`/product/${successmsg}`}>
+                                        <p className={c.successLink}>перейти на страницу товара</p>
+                                    </NavLink>
+                                    : null}
                             </div>
+
                         </Form>
                     )}
-
                 </Formik>
-                {successmsg && <h3>{successmsg}</h3> }
+
             </div>
 
             <FilesDownloader images={images} setImages={setImages} />
+            
         </div>
 
 
-    </>
+    </section>
 }

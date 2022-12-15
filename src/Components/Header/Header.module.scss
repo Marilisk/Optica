@@ -1,4 +1,4 @@
-$lime: #64E80C;
+$dark-violet: #57005C;
 $thin-gray-border: 1px solid #D8D1CA;
 $light-beige-gray: #D8D1CA;
 $dark-fontcolor: #333333;
@@ -6,42 +6,92 @@ $gray-fontcolor: #666666;
 $small-fontSize: 14px;
 $light-background: #FAFAFA;
 
-.mainWrapper {
+
+.wideWrapper {
+    width: 100vw;
+    //max-width: 100vw;
     border-bottom: 1px solid #D8D1CA;
+    //border: 1px solid seagreen;
+    padding-right: 10px;
+    @media (max-width : 768px)  {
+        padding-left: 10px;
+    }
+}
+.mainWrapper {
     display: flex;
     height: 70px;
-    min-width: 100%;
+    margin: 0 auto;
+
+    @media (max-width : 1440px)  {
+        width: 100vw;
+    }
+    @media (max-width : 768px)  {
+        max-width: 100vw;
+    }
+    @media (max-width : 533px)  {
+        display: none;
+    }
+
 }
 
 
 .logoWrap {
     width: 180px;
-    border-right: 1px solid #D8D1CA;
+    @media (max-width : 768px)  {
+        width: auto;
+    }
+    
 }
 
 .logo {
     width: 150px;
-    margin: 22px auto;
+    margin: 18px auto;
     display: block;
+    @media (max-width : 768px)  {
+        max-width: 17vw;
+        margin: 20px auto;
+        //border: 1px solid hotpink;
+    }
 }
 
 .navWrap {
     width: 60%;
     display: flex;
+    @media (max-width: 768px) {
+        width: 30%;
+        //border: 1px solid hotpink;
+    }
 }
+
 
 .navLinkWrap {
     cursor: pointer;
     margin-left: 40px;
     position: relative;
     padding: 0 10px;
-    
+    //border: 1px solid khaki;
+
+    @media (max-width: 1024px) {
+        margin-left: 10px;
+        margin: 0 auto;
+        padding: 0 6px;
+    }
+    @media (max-width: 901px) {
+        &:last-child {
+            display: none;
+        }
+    }
+    @media (max-width: 768px) {
+        font-size: 14px;
+        padding: 0 6px;
+    }
+
     &::before {
         position: absolute;
         width: 0;
         content: '';
         height: 3px;
-        background: $lime;
+        background: $dark-violet;
         left: 0;
         transition: all 700ms;
         top: -1px;
@@ -65,21 +115,33 @@ $light-background: #FAFAFA;
             border-left: $thin-gray-border ;
             border-bottom: 3px solid $light-background;
         }
-    background: $light-background;
+
+        background: $light-background;
     }
 }
 
 .navItem {
     width: fit-content;
     padding: 0 8px;
+    
     span {
         margin: 24px auto;
         display: block;
         font-weight: 800;
         color: $gray-fontcolor;
-        font-size: 16px;
+        //font-size: 16px;    
+    }
+    @media (max-width: 1024px) {
+        padding: 0 4px;
+    }
+    @media (max-width : 768px)  {
+        width: auto;
+        padding: 0 4px;
+        //border: 1px solid hotpink;
     }
 }
+
+
 
 .accordeon {
     min-height: 80px;
@@ -92,12 +154,20 @@ $light-background: #FAFAFA;
 }
 
 
+
 .menuWrap {
     display: flex;
     justify-content: flex-end;
     margin: 0;
     margin-left: auto;
     cursor: pointer;
+    //border: 1px solid hotpink;
+    @media (max-width : 768px)  {
+        width: 30%;
+        //border: 1px solid hotpink;
+        margin-left: auto;
+
+    }
 }
 
 .menuItem {
@@ -106,12 +176,21 @@ $light-background: #FAFAFA;
     border-left: $thin-gray-border;
     padding-top: 16px;
     position: relative;
+
+    @media (max-width : 768px)  {
+        width: 68px;
+        //border: 1px solid hotpink;
+        &:first-child {
+            display: none;
+        }
+    }
+
     &::before {
         position: absolute;
         width: 0;
         content: '';
         height: 3px;
-        background: $lime;
+        background: $dark-violet;
         left: 0;
         transition: all 700ms;
         top: -1px;
@@ -123,7 +202,7 @@ $light-background: #FAFAFA;
         }
     }
 
-    img {
+    img, svg {
         height: 24px;
         display: block;
         margin: 0 auto;
@@ -133,5 +212,24 @@ $light-background: #FAFAFA;
         margin: 0 auto;
         text-align: center;
         display: block;
+        
     }
 }
+
+.countLabel {
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    font-size: 14px;
+    //color: $dark-violet;
+}
+
+
+
+
+
+
+
+/* .linkList {
+    border: 1px solid yellow;
+} */

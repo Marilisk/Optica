@@ -1,102 +1,102 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "./API/api";
 
-export const fetchFeatures = createAsyncThunk('products/fetchFeatures', async () => {
-    const { data } = await instance.get('/features');
-    return data;
+export const fetchFilterOptions = createAsyncThunk('filters/fetchFilterOptions', async (filterName) => {
+    const { data } = await instance.get(`/${filterName}`);
+    //console.log(data);
+    return {data, filterName};
 })
 
 const featuresSlice = createSlice({
-    name: 'features',
+    name: 'filters',
     initialState: {
         features: [
             {
-                id: 1,
-                name: 'Оптическая сила',
-                columns: 2,
-                radioBtns: ['левая', 'правая'],
-                options: ['5', '-5'],
-                chosenOptions: [],
-                isSelected: false,
-            },
-            {
                 id: 2,
-                name: 'Гендер',
+                label: 'Гендер',
+                name: 'gender',
                 options: ['Мужские', 'Женские'],
                 chosenOptions: [],
                 isSelected: false,
             },
             {
                 id: 3,
-                name: 'Цвет',
-                options: ['чёрный', 'красный', 'золото', 'серебро', 'белый'],
+                label: 'Цвет',
+                name: 'color',
+                options: [/* 'чёрный', 'красный', 'золото', 'серебро', 'белый' */],
                 chosenOptions: [],
                 isSelected: false,
             },
             {
                 id: 4,
-                name: 'Форма',
+                label: 'Форма',
+                name: 'shape',
                 options: ['круги', 'прямоугольные', 'золото', 'серебро', 'белый'],
                 chosenOptions: [],
                 isSelected: false,
             },
             {
                 id: 5,
-                name: 'Материал',
+                label: 'Материал',
+                name: 'material',
                 options: ['пластик', 'металл'],
                 chosenOptions: [],
                 isSelected: false,
             },
             {
                 id: 6,
-                name: 'Размер',
-                options: ['маленький', 'средний', 'широкие'],
+                label: 'Ширина',
+                name: 'size',
+                options: ['узкие', 'средние', 'широкие'],
                 chosenOptions: [],
                 isSelected: false,
             },
             {
                 id: 7,
-                name: 'Особенности',
+                label: 'Особенности',
+                name: 'features',
                 options: ['чёрный', 'красный', 'золото', 'серебро', 'белый'],
                 chosenOptions: [],
                 isSelected: false,
             },
-        ]
+        ],
+
+        status: '',
 
     },
     reducers: {
-        onSelectFeature(state, action) {
+        selectFilter(state, action) {
             const item = state.features.find((el) => el.id === action.payload.feature);
             let isOptionChosen = item.chosenOptions.includes(action.payload.option);
             if (isOptionChosen) {
-                console.log([...item.chosenOptions]);
-                item.chosenOptions = item.chosenOptions.feature(chosenOption => chosenOption !== action.payload.option);
+                item.chosenOptions = item.chosenOptions.filter(chosenOption => chosenOption !== action.payload.option);
                 item.options.push(action.payload.option);
                 item.isSelected = item.chosenOptions.length;
             } else {
                 item.chosenOptions.push(action.payload.option);
-                item.options = item.options.feature(opt => opt !== action.payload.option);
+                item.options = item.options.filter(opt => opt !== action.payload.option);
                 item.isSelected = item.chosenOptions.length;
             }
         },
+    },
+        extraReducers: (builder) => {
+            builder.addCase( fetchFilterOptions.pending, (state, action) => {
+                //state.features[action.filterName].options = [];
+                state.status = 'loading';
+            })
+            .addCase(fetchFilterOptions.fulfilled, (state, action) => {
+                //console.log(action.payload)
+                state.features.find(filter => filter.name === action.payload.filterName).options = action.payload.data;
+                state.status = 'loaded';
+            })
+            .addCase(fetchFilterOptions.rejected, (state, action) => {
+                //state.features[action.filterName].options = [];
+                state.status = 'error';
+            })
+        },
 
-      /*   extraReducers: (builder) => {
-            builder.addCase( fetchFeatures.pending, (state, action) => {
-                state.features.items = [];
-                state.features.status = 'loading';
-            })
-            .addCase(fetchFeatures.fulfilled, (state, action) => {
-                state.features.items = action.payload;
-                state.features.status = 'loaded';
-            })
-            .addCase(fetchFeatures.rejected, (state, action) => {
-                state.features.items = [];
-                state.features.status = 'error';
-            })
-        }, */
-
-    }
+    
 })
 
-export const { onSelectFeature } = featuresSlice.actions;
+export const { selectFilter } = featuresSlice.actions;
 export default featuresSlice.reducer;

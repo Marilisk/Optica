@@ -14,35 +14,81 @@ h2, h3 {
 }
 .firstRow {
     display: flex;
-    //justify-content: space-around;
     justify-content: center;
-    max-height: 481px;
     max-height: 681px;
-    max-width: 1440px; 
-    margin: 0 auto;
+    overflow-x: hidden;
     img {
         margin: 16px;
         max-height: 481px;
+        object-fit: contain;
+        //object-fit: cover;        
+    }
+    @media (max-width: 1024px) {
+        //display: block;
+        //max-height: none;
+        img {
+            width: 50%;
+            object-fit: cover;
+        }
+    }
+    @media (max-width: 768px) {
+        display: block;
+        max-height: none;
+
+        img {
+            margin: 0 auto;
+            width: 100%;
+            object-fit: cover;
+            padding: 0;
+        }
     }
 
     div {
-        //width: 37%;
         width: 25%;
-        //width: auto;
         margin: 16px 0;
         background: $dark-violet;
         color: white;
         padding: 30px;
+        max-height: 481px;
+        @media (max-width: 1200px) {
+            padding: 15px;
+            width: 37%;
+            max-height: 471px;
+
+        }
+        @media (max-width: 1032px) {
+            padding: 0 20px;
+        }
+        @media (max-width: 1024px) {
+            padding: 0 20px;
+            padding-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            width: 100vw;
+            padding: 30px;
+            margin: 0 auto;
+        }
+        @media (max-width: 533px) {
+
+        }
+       
+        h3 {
+            max-width: 90%;
+        }
     }
 
     h2 {
         font-size: 34px;
         font-weight: 700;
         letter-spacing: .03em;
+        //border: 1px solid white;
+        margin-top: 0;
     }
 
     .subscrP {
         font-size: $small-fontSize;
+        //border: 1px solid red;
+        max-width: 86%;
     }
 
 }
@@ -51,15 +97,47 @@ h2, h3 {
     display: flex;
     justify-content: space-between;
     margin-top: 120px;
-    width: 100%;
-    img:nth-child(1) {
+    @media (max-width: 768px) {
+        //display: block;
+        max-height: none;
+    }
+    @media (max-width: 533px) {
+        max-height: none;
+        display: block;
+        text-align: center;
+    }
+
+    img/* :nth-child(1) */ {
         width: 100%;
         max-height: 362px;
-        min-width: 202px;    
+        min-width: 202px; 
+        object-fit: cover;
+        display: block;
+        margin: 0;
+        //border: 2px solid yellow;
+        @media (max-width: 768px)
+         and (min-width: 534px) {
+            min-width: 130px;
+            margin: 0 auto;
+            max-height: none;
+            width: 50%;
+        } 
+        @media (max-width: 533px) {
+
+        }
     }
     & > div {
         width: 33,3%;
         margin: 0 20px;
+        //border: 1px solid teal;
+        @media (max-width: 768px) {
+            width: 50%;
+        } 
+        @media (max-width: 533px) {
+            width: 100%;
+            margin: 0;
+            margin-bottom: 40px;
+        }
     }
     p {
         font-weight: 600;
@@ -76,14 +154,18 @@ h2, h3 {
         font-family: $serif-font-family;
         font-weight: 900;
     }
+   
 }
 
-
+// текст линков под картинками
 .bestSellers, .shopByLink {
     font-size: 16px;
     color: $green;
     display: flex;
     cursor: pointer;
+    @media (max-width: 533px) {
+        display: inline;   
+    }
 }
 .shopByLink {
     color: #03424C;
@@ -93,6 +175,8 @@ h2, h3 {
     height: 10px;
 }
 
+
+// фиолетовая строка "будьте готовы выглядеть..."
 .shopProcessSection {
     display: block;
     background: $dark-violet;
@@ -106,6 +190,7 @@ h2, h3 {
     max-width: 1440px; 
     display: flex;
     justify-content: space-between;
+   
     h2 {
         font-family: $serif-font-family;
         font-weight: 700;
@@ -117,5 +202,15 @@ h2, h3 {
     }
     a {
         color: white;
+    }
+    @media (max-width: 533px) {
+        display: block; 
+        padding: 28px;
+
+        div {
+            width: 99%;
+            text-align: justify;
+            font-size: 16px;
+        }  
     }
 }

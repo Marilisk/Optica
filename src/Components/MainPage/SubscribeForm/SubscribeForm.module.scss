@@ -9,41 +9,108 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 $serif-font-family: 'Playfair Display SC', serif;
 
-h2, h3 {
-    font-family: $serif-font-family;
 
-  
-}
 
 .subscribeForm {
     display: flex;
-}
-.subscribeForm input, button {
-    font-size: 16px;
-}
-.subscribeForm input {
-    padding: .84em .4em;  
-    color: #666666;
-    &:focus {
-        outline: none;
-    }     
-}
 
-.subscribeForm button {
-    background: #D8C1D9;
-    border: none;
-    color: $gray-fontcolor;
-    height: 3em;
-    width: 31%;
-    letter-spacing: .03em;
-    margin: 0 auto auto 6px;
-    font-weight: 600;
-    cursor: pointer;
+    @media (max-width: 1200px) {
+        display: block;
+    }
 
-    &:hover {
-        background: $light-beige-gray;
-        transition: 400ms;
+    @media (max-width: 840px) {
+        display: flex;
     }
 }
 
+.subscribeForm {
+
+    input,
+    button {
+        font-size: 18px;
+        height: 3em;
+        border-radius: 2px;
+        padding: 0 .4em;
+
+        @media (max-width: 1350px) {
+            font-size: 14px;
+        }
+
+        @media (max-width: 1325px) {
+            height: 2em;
+        }
+
+        @media (max-width: 1200px) {
+            height: 3em;
+        }
+    }
+
+    input {
+        color: #666666;
+        width: 62%;
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+
+        @media (max-width: 1200px) {
+            width: 94%;
+        }
+
+        @media (max-width: 840px) {
+            width: 63%;
+        }
+
+        @media (max-width: 768px) {
+            width: 36%;
+        }
+
+        @media (max-width: 533px) {
+            width: 63%;
+        }
+    }
+
+    button {
+        background: #D8C1D9;
+        border: none;
+        color: $dark-fontcolor;
+        //width: 31%;
+        letter-spacing: .03em;
+        margin: auto auto auto 6px;
+        font-weight: 600;
+        cursor: pointer;
+    
+        &:hover {
+            background: $light-beige-gray;
+            transition: 400ms;
+        }
+    
+        @media (max-width: 1200px) {
+            margin: 10px auto;
+            display: block;
+        }
+    
+        @media (max-width: 840px) {
+            height: 2em;
+            margin: 2px auto;
+            height: 3em;
+    
+            //margin: 2px auto auto 6px; 
+        }
+    
+        @media (max-width: 768px) {
+            width: 20%;
+            margin: auto auto auto 6px;
+            //height: 3em;
+        }
+    
+        @media (max-width: 533px) {
+            width: auto;
+        }
+    
+    }
+
+
+}
 

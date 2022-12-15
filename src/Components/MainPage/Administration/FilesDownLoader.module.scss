@@ -11,6 +11,7 @@ $serif-font-family: 'Playfair Display SC', serif;
 
 
 .downloader {
+    //border: 1px solid greenyellow;
     & > div {
         padding: 1em;
         display: flex;
@@ -18,12 +19,12 @@ $serif-font-family: 'Playfair Display SC', serif;
 
     }
     input {
-        width: 240px;
+        width: 260px;
     }
 
     img {
         //max-width: 150px;
-        max-height: 150px;
+        max-height: 170px;
         border: $thin-gray-border;
         padding: 1em;
         display: block;
@@ -31,7 +32,7 @@ $serif-font-family: 'Playfair Display SC', serif;
     }
 
     label {
-        width: 30%;
+        width: 40%;
         display: block;
     }
 

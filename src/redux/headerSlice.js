@@ -9,6 +9,8 @@ const headerSlice = createSlice({
         mainMenu: [{
             name: 'Женщины',
             url: `women`,
+            /* links: [ {label: 'Все оправы', to: '/women'}, 
+                {label: 'Оправы до 3000руб. ', to: '/women'}, {label: 'Все оправы', to: '/women'}, {label: 'Все оправы', to: '/women'}] */
         },
         {
             name: 'Мужчины',

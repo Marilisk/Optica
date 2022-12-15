@@ -25,7 +25,7 @@ export const FilesDownloader = ({ images, setImages }) => {
                     onChange={(e) => handleChangeFile(e, 'main' )} />
 
             </label>
-            {images.main && <img src={`${process.env.REACT_APP_API_URL}${images.main}`} alt='' />}
+            {images.main && <img src={`http://localhost:4444${images.main}`} alt='' />}
         </div>
 
         <div>
@@ -33,7 +33,7 @@ export const FilesDownloader = ({ images, setImages }) => {
                 <input type='file' id='imageUrl' name='imageUrl'
                     onChange={(e) => handleChangeFile(e, 'side')} />
             </label>
-            {images.side && <img src={`${process.env.REACT_APP_API_URL}${images.side}`} alt='' />}
+            {images.side && <img src={`http://localhost:4444${images.side}`} alt='' />}
         </div>
 
         <div>
@@ -41,7 +41,7 @@ export const FilesDownloader = ({ images, setImages }) => {
                 <input type='file' id='imageUrl' name='imageUrl'
                     onChange={(e) => handleChangeFile(e, 'perspective')} />
             </label>
-            {images.perspective && <img src={`${process.env.REACT_APP_API_URL}${images.perspective}`} alt='' />}
+            {images.perspective && <img src={`http://localhost:4444${images.perspective}`} alt='' />}
         </div>
 
         

@@ -5,6 +5,10 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
     const { data } = await instance.get('/products');
     return data;
 });
+export const fetchFilteredProducts = createAsyncThunk('products/fetchProducts', async () => {
+    const { data } = await instance.get('/products');
+    return data;
+});
 export const fetchProd = createAsyncThunk('products/fetchProd', async (id) => { 
     const data = await instance.get(`/products/${id}`);
     return data.data;
@@ -13,10 +17,16 @@ export const fetchDeleteProd = createAsyncThunk('products/fetchDeleteProd', asyn
     const data = await instance.delete(`/products/` + id);
     console.log(data);
     if (data.data.success === 'true') {
-
     }
     return {data: data.data, id};
 });
+/* export const fetchAddToFavorites = createAsyncThunk('products/fetchDeleteProd', async (id) => {
+    const data = await instance.delete(`/products/` + id);
+    console.log(data);
+    if (data.data.success === 'true') {
+    }
+    return {data: data.data, id};
+}); */
 
 
 const productsSlice = createSlice({
@@ -38,13 +48,12 @@ const productsSlice = createSlice({
         onAddToCart(state, action) {
             //const item = state.items.find(el => el.id === action.payload.item);
         },
-        anotherBestsellers(state, action) {
+      /*   anotherBestsellers(state, action) {
             state.bestsellersPortion = action.payload ?
                 ++state.bestsellersPortion
                 : --state.bestsellersPortion;
-        },
+        }, */
         setCurrentProd(state, action) {
-            //console.log(action);
             state.currentProduct.item = action.payload;
             state.currentProduct.status = 'loaded';
         },
@@ -57,6 +66,9 @@ const productsSlice = createSlice({
         })
         .addCase(fetchProducts.fulfilled, (state, action) => {
             state.products.items = action.payload;
+            state.products.items.map(product => {
+                product.size = 'широкие'
+            }  )
             state.products.status = 'loaded';
         })
         .addCase(fetchProducts.rejected, (state, action) => {
@@ -89,12 +101,14 @@ const productsSlice = createSlice({
             //state.currentProduct.item = {};
             state.currentProduct.status = 'error';
         })
+        
+        
     },
 })
 
 export const {
-    onAddToCart,
-    anotherBestsellers,
+    onAddToCart,/* 
+    anotherBestsellers, */
     setCurrentProd,    
 } = productsSlice.actions;
 

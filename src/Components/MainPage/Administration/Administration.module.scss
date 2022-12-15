@@ -9,28 +9,58 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 $serif-font-family: 'Playfair Display SC', serif;
 
+.header {
+    margin: 40px auto;
+    h2 {
+        text-align: center;
+    }
+}
+
 .adminWrapper {
     display: flex;
-    //background: red;
+    margin-bottom: 60px;
 }
 .formikWrapper {
     width: 50%;
 }
 .form {
-    width: 62%;
+    width: 80%;
     margin-left: 80px ;
+    
 }
 .inputWrapper {
     display: flex;
-    //border: 1px solid firebrick;
-    margin: 10px auto;
+    margin: 0 auto;
+    padding: 4%;
+    
+    &:nth-child(odd) {
+        background: $light-background;
+        input {
+            background: $light-background;
+        }
+    }
     label {
-        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        p {
+            width: 170px;
+            display: inline-block;
+            border: 1px solid pink;
+        }
+    }
+    .arrayLabel {
+        display: inline-block;
+        margin-right: 20px;
     }
     input {
-        padding: 1em;
+        padding: .7em;
+        height: 1em;
+        margin-top: -6px;
+        margin-left: 10px;
+        width: 190px;
+        //margin-left: 10px;
         font-family: 'Courier New', Courier, monospace;
-        //font-family: inherit;
+        font-family: inherit;
         color: inherit;
         border: 1px solid transparent;
         border-bottom: 1px solid $light-beige-gray;
@@ -41,11 +71,42 @@ $serif-font-family: 'Playfair Display SC', serif;
     }
 }
 
+.submitBtn {
+    border: 3px solid #C899CC;
+    color: $violet;
+    font-weight: 600;
+    letter-spacing: .5px;
+    font-size: 18px;
+    background: white;
+    padding: .6em;
+    cursor: pointer;
+    transition: 300ms;
+    margin: 40px auto;
+    display: block;
+    &:hover {
+        border-color: $violet;
+    }
+    &:disabled {
+        color: #D8D1CA;
+        border-color: $light-beige-gray;
+    }
+}
+
 .btn {
     font-size: 12px;
     background: white;
     border: $thin-gray-border;
     border-radius: 10px;
     padding: 6px;
-    margin-top: 4px;
+    margin: 10px auto;
+    color: $gray-fontcolor;
+    cursor: pointer;
+}
+
+.successLink {
+    margin: 0 auto;
+    text-align: center;
+    color: $dark-violet;
+    font-weight: 600;
+    text-decoration: underline;
 }
