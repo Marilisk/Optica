@@ -12,12 +12,14 @@ $serif-font-family: 'Playfair Display SC', serif;
 
 .mainSection {
     display: flex;
-    height: 26vw;
+    height: 15vw;
+
+    //max-height: 150px;
     @media (max-width: 533px) {
         flex-direction: column-reverse;     
     }  
     @media (max-width: 1024px) {
-        height: 38vw;     
+        height: 20vw;     
     }  
     @media (max-width: 768px) {
         height: auto;
@@ -58,8 +60,9 @@ $serif-font-family: 'Playfair Display SC', serif;
 .mainImgBlock {
     flex: 2;
     width: 100%;
-    background: url('./../../assets/women/main/mainImg.jpg') no-repeat;
+    background: url('./../../assets/lenses/main-lenses.jpg') no-repeat;
     background-size: cover;
+    //background-size: contain;
     background-position: center center;
     //border: 2px solid pink;
     overflow: hidden;

@@ -2,37 +2,37 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "./API/api.js";
 import { defineSize } from "./functions/defineSize.js";
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-    const { data } = await instance.get('/products');
+export const fetchLenses = createAsyncThunk('lenses/fetchProducts', async () => {
+    const { data } = await instance.get('/lenses');
     return data;
 });
-export const fetchFilteredProducts = createAsyncThunk('products/fetchProducts', async () => {
-    const { data } = await instance.get('/products');
+export const fetchFilteredProducts = createAsyncThunk('lenses/fetchProducts', async () => {
+    const { data } = await instance.get('/lenses');
     return data;
 });
-export const fetchProd = createAsyncThunk('products/fetchProd', async (id) => { 
-    const data = await instance.get(`/products/${id}`);
+export const fetchProd = createAsyncThunk('lenses/fetchProd', async (id) => { 
+    const data = await instance.get(`/lenses/${id}`);
     return data.data;
 });
-export const fetchDeleteProd = createAsyncThunk('products/fetchDeleteProd', async (id) => {
-    const data = await instance.delete(`/products/` + id);
+export const fetchDeleteProd = createAsyncThunk('lenses/fetchDeleteProd', async (id) => {
+    const data = await instance.delete(`/lenses/` + id);
     console.log(data);
     if (data.data.success === 'true') {
     }
     return {data: data.data, id};
 });
 
-export const fetchSearch = createAsyncThunk('products/fetchSearch', async (query) => {
+export const fetchSearch = createAsyncThunk('lenses/fetchSearch', async (query) => {
     //console.log(query)
-    const response = await instance.post(`/products/search`, { query });
+    const response = await instance.post(`/lenses/search`, { query });
     //console.log(response);
     return response.data;
 });
 
 
 
-const productsSlice = createSlice({
-    name: 'products',
+const lensesSlice = createSlice({
+    name: 'lenses',
     initialState: {
         products: {
             items: [ ],
@@ -41,15 +41,9 @@ const productsSlice = createSlice({
     
         currentProduct: {item: null, status: 'loaded' },
         searchResult: {items: [], status: 'loaded' },
-        tags: {
-            items: [],
-            status: 'loaded',
-        },
+        tags: { items: [], status: 'loaded', },
     },
     reducers: {
-        onAddToCart(state, action) {
-            //const item = state.items.find(el => el.id === action.payload.item);
-        },
       
         setCurrentProd(state, action) {
             state.currentProduct.item = action.payload;
@@ -63,18 +57,15 @@ const productsSlice = createSlice({
 
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchProducts.pending, (state) => {
+        builder.addCase(fetchLenses.pending, (state) => {
             state.products.items = [];
             state.products.status = 'loading';
         })
-        .addCase(fetchProducts.fulfilled, (state, action) => {
+        .addCase(fetchLenses.fulfilled, (state, action) => {
             state.products.items = action.payload;
-            state.products.items.forEach(product => {
-                product.size = defineSize(product.frameWidth)
-            });
             state.products.status = 'loaded';
         })
-        .addCase(fetchProducts.rejected, (state, action) => {
+        .addCase(fetchLenses.rejected, (state) => {
             state.products.items = [];
             state.products.status = 'error';
         })
@@ -120,10 +111,7 @@ const productsSlice = createSlice({
 })
 
 export const {
-    onAddToCart,/* 
-    anotherBestsellers, */
-    setCurrentProd, 
-    clearSearchResults,   
-} = productsSlice.actions;
+    clearSearchResults,
+} = lensesSlice.actions;
 
-export default productsSlice.reducer;
+export default lensesSlice.reducer;

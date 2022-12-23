@@ -69,7 +69,10 @@ $light-background: #FAFAFA;
     margin-left: 40px;
     position: relative;
     padding: 0 10px;
-    //border: 1px solid khaki;
+    //border: 1px solid hotpink;
+    //z-index: 10;
+    
+
 
     @media (max-width: 1024px) {
         margin-left: 10px;
@@ -98,6 +101,8 @@ $light-background: #FAFAFA;
     }
 
     &:hover {
+        border-right: $thin-gray-border ;
+            border-left: $thin-gray-border ;
         &::before {
             width: 101%;
         }
@@ -107,13 +112,18 @@ $light-background: #FAFAFA;
             box-sizing: padding-box;
             width: 100%;
             content: '';
-            height: 69px;
+            height: 3px;
             z-index: 0;
             left: 0;
-            top: 0px;
-            border-right: $thin-gray-border ;
-            border-left: $thin-gray-border ;
-            border-bottom: 3px solid $light-background;
+            top: 69px;
+            //border-right: $thin-gray-border ;
+            //border-left: $thin-gray-border ;
+            //border-bottom: 3px solid $light-background;
+            background: $light-background;
+            //background: pink;
+
+            //border: 1px solid khaki;
+
         }
 
         background: $light-background;
@@ -123,6 +133,7 @@ $light-background: #FAFAFA;
 .navItem {
     width: fit-content;
     padding: 0 8px;
+    //z-index: 10000;
     
     span {
         margin: 24px auto;
@@ -137,7 +148,6 @@ $light-background: #FAFAFA;
     @media (max-width : 768px)  {
         width: auto;
         padding: 0 4px;
-        //border: 1px solid hotpink;
     }
 }
 
@@ -149,7 +159,7 @@ $light-background: #FAFAFA;
     background: $light-background;
     border: $thin-gray-border;
     top: 70px;
-    left: 0;
+    left: -1px;
     position: absolute;
 }
 
@@ -166,7 +176,6 @@ $light-background: #FAFAFA;
         width: 30%;
         //border: 1px solid hotpink;
         margin-left: auto;
-
     }
 }
 

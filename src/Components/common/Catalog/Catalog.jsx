@@ -6,6 +6,8 @@ import { Preloader } from '../../../assets/common/Preloader/Preloader';
 export const Catalog = ({dispatch, products, areProdsLoading, addToFavorites, removeFromFavorites, userFavorites, authIsLoading}) => {
     // const filteredProducts = products.filter(product => product)
     
+    
+    //console.log(products)
    
     if (areProdsLoading) {
         return <Preloader minFormat={true} />;

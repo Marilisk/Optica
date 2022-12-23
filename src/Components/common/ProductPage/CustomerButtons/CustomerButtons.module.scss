@@ -13,7 +13,6 @@ $serif-font-family: 'Playfair Display SC', serif;
 .btnWrap {
     display: flex;
     justify-content: space-between;
-    //border: 1px solid fuchsia;
     margin-top: 46px;
     button {
         width: 45%;
@@ -30,21 +29,16 @@ $serif-font-family: 'Playfair Display SC', serif;
     background: white;
     display: flex;
     justify-content: center;
-
-
+    margin-right: 6px;
     border: 3px solid $light-violet;
     &:hover {
         border-color: $violet;
     }
-    
     svg {
-        //border: 1px solid green;
         margin-left: 4px;
-        //margin-top: 4px;
         height: 18px;
     }
     span {
-        //position: relative;
         margin: 0;
     }
     &:disabled {
@@ -69,7 +63,6 @@ $serif-font-family: 'Playfair Display SC', serif;
     }
 
     svg {
-        //border: 1px solid green;
         margin: 0 auto;
         height: 18px;
     }
@@ -79,6 +72,8 @@ $serif-font-family: 'Playfair Display SC', serif;
     background: $dark-violet;
     color: white;
     border: none;
+    margin-left: 6px;
+
     &:hover {
         background: $light-violet;
     }

@@ -1,10 +1,8 @@
-
 import c from './Men.module.scss';
-import mainImg from './../../assets/men/man-optic-shop.jpg';
 import { BreadCrumbs } from '../common/BreadCrumbs/BreadCrumbs';
 import { FiltersDashboard } from '../common/FiltersDashboard/FiltersDashboard';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFilterOptions, selectFilter } from '../../redux/featuresSlice.js';
+import { clearAllFilters, selectFilter } from '../../redux/featuresSlice.js';
 import { Catalog } from '../common/Catalog/Catalog';
 import { useEffect } from 'react';
 import { filterProducts } from '../../assets/functions/filterProducts';
@@ -29,10 +27,9 @@ export const Men = ({addToFavorites, removeFromFavorites, userFavorites, authIsL
     }
     const filtered = filterProducts(products.items, selectedFilters);
 
-    useEffect( ()=> {
-        /* dispatch(fetchFilterOptions('features'));
-        dispatch(fetchFilterOptions('color')); */
-        dispatch(selectFilter({feature: 2, option: 'мужские'}) )
+    useEffect(()=> {
+        dispatch(clearAllFilters());
+        dispatch(selectFilter({feature: 2, option: 'мужские'}));
     }, [dispatch]);
 
     return <>
@@ -49,9 +46,7 @@ export const Men = ({addToFavorites, removeFromFavorites, userFavorites, authIsL
                     </p>
                 </div>
             </div>
-            <div className={c.mainImgBlock}>
-                {/* <img alt='' src={mainImg} className={c.mainImg} /> */}
-            </div>
+            <div className={c.mainImgBlock}></div>
 
         </section>
 
@@ -65,12 +60,6 @@ export const Men = ({addToFavorites, removeFromFavorites, userFavorites, authIsL
                 userFavorites={userFavorites}
                 authIsLoading={authIsLoading} />
 
-        {/* <section className={c.sortBoard}>
-            <div></div>
-            <div></div>
-            <div></div>
-
-        </section>
-        <div></div> */}
+        
     </>
 }

@@ -42,10 +42,15 @@ $serif-font-family: 'Playfair Display SC', serif;
     label {
         display: flex;
         justify-content: space-between;
-        p {
+        //border: 1px solid pink;
+
+        /* p {
             width: 170px;
             display: inline-block;
-            border: 1px solid pink;
+        } */
+        input {
+            //border: 1px solid green;
+            padding: 1em;
         }
     }
     .arrayLabel {
@@ -71,7 +76,7 @@ $serif-font-family: 'Playfair Display SC', serif;
     }
 }
 
-.submitBtn {
+.submitBtn, .resetBtn {
     border: 3px solid #C899CC;
     color: $violet;
     font-weight: 600;
@@ -83,12 +88,22 @@ $serif-font-family: 'Playfair Display SC', serif;
     transition: 300ms;
     margin: 40px auto;
     display: block;
+    width: 100%;
     &:hover {
         border-color: $violet;
     }
     &:disabled {
         color: #D8D1CA;
         border-color: $light-beige-gray;
+    }
+}
+
+.resetBtn {
+    color: $gray-fontcolor;
+    border-color: transparent;
+    &:hover {
+        border-color: $gray-fontcolor;
+
     }
 }
 

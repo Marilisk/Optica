@@ -23,7 +23,7 @@ const featuresSlice = createSlice({
                 id: 3,
                 label: 'Цвет',
                 name: 'color',
-                options: [/* 'чёрный', 'красный', 'золото', 'серебро', 'белый' */],
+                options: [],
                 chosenOptions: [],
                 isSelected: false,
             },
@@ -78,6 +78,11 @@ const featuresSlice = createSlice({
                 item.isSelected = item.chosenOptions.length;
             }
         },
+        clearAllFilters(state, action) {
+            for (let filter of state.features) {
+                filter.chosenOptions = [];
+            }
+        },
     },
         extraReducers: (builder) => {
             builder.addCase( fetchFilterOptions.pending, (state, action) => {
@@ -98,5 +103,5 @@ const featuresSlice = createSlice({
     
 })
 
-export const { selectFilter } = featuresSlice.actions;
+export const { selectFilter, clearAllFilters } = featuresSlice.actions;
 export default featuresSlice.reducer;

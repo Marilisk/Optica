@@ -1,3 +1,4 @@
+import { Preloader } from '../../../assets/common/Preloader/Preloader';
 import instance from '../../../redux/API/api';
 import c from './FilesDownLoader.module.scss';
 
@@ -17,6 +18,9 @@ export const FilesDownloader = ({ images, setImages }) => {
         }
     }
 
+    if (!images) {
+        return <Preloader minFormat={true} />
+    }
 
     return <div className={c.downloader}>
         <div>
@@ -43,9 +47,5 @@ export const FilesDownloader = ({ images, setImages }) => {
             </label>
             {images.perspective && <img src={`http://localhost:4444${images.perspective}`} alt='' />}
         </div>
-
-        
-
-
     </div>
 }

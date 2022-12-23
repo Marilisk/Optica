@@ -1,9 +1,8 @@
 import c from './Women.module.scss';
-import mainImg from './../../assets/women/main/mainImg.jpg';
 import { BreadCrumbs } from '../common/BreadCrumbs/BreadCrumbs';
 import { FiltersDashboard } from '../common/FiltersDashboard/FiltersDashboard';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFilterOptions, selectFilter } from '../../redux/featuresSlice.js';
+import { clearAllFilters, fetchFilterOptions, selectFilter } from '../../redux/featuresSlice.js';
 import { Catalog } from '../common/Catalog/Catalog';
 import { useEffect } from 'react';
 import { fetchProducts } from '../../redux/productsSlice';
@@ -34,6 +33,7 @@ export const Women = ({addToFavorites, removeFromFavorites, userFavorites, authI
         //dispatch(fetchProducts());
         dispatch(fetchFilterOptions('features'));
         dispatch(fetchFilterOptions('color'));
+        dispatch(clearAllFilters());
         dispatch(selectFilter({feature: 2, option: 'женские'}) )
     }, [dispatch]);
 
@@ -67,12 +67,5 @@ export const Women = ({addToFavorites, removeFromFavorites, userFavorites, authI
                 userFavorites={userFavorites}
                 authIsLoading={authIsLoading} />
 
-        {/* <section className={c.sortBoard}>
-            <div></div>
-            <div></div>
-            <div></div>
-
-        </section>
-        <div></div> */}
     </>
 }

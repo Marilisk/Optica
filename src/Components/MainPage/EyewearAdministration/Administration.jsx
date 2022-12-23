@@ -1,22 +1,20 @@
-import { Field, FieldArray, Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { Preloader } from '../../../assets/common/Preloader/Preloader';
 import instance from '../../../redux/API/api';
 import { fetchProd } from '../../../redux/productsSlice';
-import { CreateFieldArray, createFieldArray } from './createFieldArray';
+import { CreateFieldArray } from './createFieldArray';
 import c from './Administration.module.scss';
 import { FilesDownloader } from './FilesDownLoader';
-import { initValues } from './initvalues';
+import { initValues } from './../InitValues/EyewearInitvalues';
+
 
 export const Administration = ({ }) => {
     const dispatch = useDispatch();
     const params = useParams();
-
-
     const [successmsg, setSuccessMsg] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (params.id) {
@@ -26,16 +24,18 @@ export const Administration = ({ }) => {
 
     const currentProduct = useSelector(state => state.products.currentProduct);
     const editMode = Boolean(params.id);
-    //console.log(currentProduct)
-    //console.log('editMode ' + editMode);
 
     const [images, setImages] = useState(editMode ? currentProduct.item?.imageUrl : { main: '', side: '', perspective: '' });
+
+    // for RTK Query:
+    //const [addProduct, {isError}] = useAddProductMutation();
 
     if (editMode && !currentProduct.item) {
         return <div><Preloader /></div>
     }
 
     const initialValues = initValues(editMode, currentProduct, images);
+
 
     return <section>
         <div className={c.header}>
@@ -53,11 +53,10 @@ export const Administration = ({ }) => {
                                 : await instance.post('/products', values);
                             const id = data._id;
                             setSuccessMsg(id);
-                            /* console.log('response of submit:');
-                            console.log(data); */
-                            if (data.success) {
+                            console.log(data);
+                            if (data.success === true || (editMode && data._id) ) {
                                 alert('успешно!');
-                                actions.resetForm();
+                                actions.resetForm({initialValues});
                             }
                         } catch (error) {
                             console.warn(error);
@@ -66,7 +65,7 @@ export const Administration = ({ }) => {
                     }}
                 >
 
-                    {({ values }) => (
+                    {({ values, actions }) => (
                         <Form>
                             <div className={c.form}>
                                 <div className={c.inputWrapper}>
@@ -97,71 +96,15 @@ export const Administration = ({ }) => {
                                     </label>
                                 </div>
 
-                                {/* <div className={c.inputWrapper}>
-                                    <FieldArray name='gender'>
-                                        {({ insert, remove, push }) => (
-                                            <div>Гендер:
-                                                {values.gender.length > 0 &&
-                                                    values.gender.map((gender, index) => (
-                                                        <div key={index}>
-                                                            <label className={c.arrayLabel}>{index + 1}.
-                                                                <Field name={`gender.${index}`} type="text" />
-                                                            </label>
-                                                            <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
-
-                                                        </div>
-                                                    ))}
-                                                <button className={c.btn} type="button" onClick={() => push('')}>добавить поле</button>
-                                            </div>
-                                        )}
-                                    </FieldArray>
-                                </div> */}
-
                                 <CreateFieldArray name='gender'
                                     array={values.gender}
                                     title={'Гендер'} />
 
-                                {/* <div className={c.inputWrapper}>
-                                    <FieldArray name='features'>
-                                        {({ insert, remove, push }) => (
-                                            <div>Особенности:
-                                                {values.features.length > 0 &&
-                                                    values.features.map((feature, index) => (
-                                                        <div key={index}>
-                                                            <label className={c.arrayLabel}>{index + 1}.
-                                                                <Field name={`features.${index}`} type="text" />
-                                                            </label>
-                                                            <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
-
-                                                        </div>
-                                                    ))}
-                                                <button className={c.btn} type="button" onClick={() => push('')}>добавить поле</button>
-                                            </div>
-                                        )}
-                                    </FieldArray>
-                                </div> */}
                                 <CreateFieldArray name='features'
                                     array={values.features}
                                     title={'Особенности'} />
 
-                                {/* <div className={c.inputWrapper}>
-                                    <FieldArray name='options'>
-                                        {({ insert, remove, push }) => (
-                                            <div>Опции:
-                                                {values.options.length > 0 &&
-                                                    values.options.map((feature, index) => (
-                                                        <div key={index}>
-                                                            <label className={c.arrayLabel}>{index + 1}.
-                                                                <Field name={`options.${index}`} type="text" />
-                                                            </label>
-                                                            <button type="button" className={c.btn} onClick={() => remove(index)}>удалить</button>
-                                                        </div>
-                                                    ))}
-                                                <button className={c.btn} type="button" onClick={() => push('')}>добавить поле</button>
-                                            </div>
-                                        )}
-                                    </FieldArray>
-                                </div> */}
+                               
                                 <CreateFieldArray name='options'
                                     array={values.options}
                                     title={'Опции'} />
@@ -178,20 +121,11 @@ export const Administration = ({ }) => {
                                     </label>
                                 </div>
 
-                                {/* <div className={c.inputWrapper}>
-                                    <label>форма
-                                        <Field name='shape' />
-                                    </label>
-                                </div> */}
+                            
                                 <CreateFieldArray name='shape'
                                     array={values.shape}
                                     title={'Форма'} />
 
-                                {/* <div className={c.inputWrapper}>
-                                    <label>цвет
-                                        <Field name='color' />
-                                    </label>
-                                </div> */}
                                 <CreateFieldArray name='color'
                                     array={values.color}
                                     title={'Цвет'} />
@@ -238,11 +172,6 @@ export const Administration = ({ }) => {
                                     </label>
                                 </div>
 
-                                {/* <div className={c.inputWrapper}>
-                                    <label>материал
-                                        <Field type='text' name='material' />
-                                    </label>
-                                </div> */}
                                 <CreateFieldArray name='material'
                                     array={values.material}
                                     title={'Материал'} />
@@ -260,7 +189,13 @@ export const Administration = ({ }) => {
                                 </div>
 
 
-                                <button className={c.submitBtn} disabled={currentProduct.isLoading} type='submit'>ОТПРАВИТЬ</button>
+                                <button className={c.submitBtn} disabled={currentProduct.isLoading === 'isLoading'} type='submit'>ОТПРАВИТЬ</button>
+                                <button className={c.resetBtn} disabled={currentProduct.isLoading}
+                                    type='button'
+                                    onClick={() => actions.resetForm( {initialValues} )} >
+                                    ОЧИСТИТЬ
+                                </button>
+
 
                                 {successmsg ?
                                     <NavLink to={`/product/${successmsg}`}>

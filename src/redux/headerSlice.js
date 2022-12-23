@@ -3,27 +3,45 @@ import { createSlice } from "@reduxjs/toolkit";
 const headerSlice = createSlice({
     name: 'header',
     initialState: {
-        fullHeader: true, 
+        fullHeader: true,
         menuOpened: null,
-        loginModalOpened: false,    
-        mainMenu: [{
-            name: 'Женщины',
-            url: `women`,
-            /* links: [ {label: 'Все оправы', to: '/women'}, 
-                {label: 'Оправы до 3000руб. ', to: '/women'}, {label: 'Все оправы', to: '/women'}, {label: 'Все оправы', to: '/women'}] */
-        },
-        {
-            name: 'Мужчины',
-            url: `men`,
-        },
-        {
-            name: 'Дети',
-            url: `children`,
-        },
-        {
-            name: 'Brands',
-            url: `brands`,
-        },],     
+        loginModalOpened: false,
+        mainMenu: [
+            {
+                name: 'Женщины',
+                url: `women`,
+                links: [
+                    { label: 'Все оправы', to: '/women' },
+                    { label: 'Очки для чтения', to: '/women', featureFilter: 'для чтения' },
+                ]
+            },
+            {
+                name: 'Мужчины',
+                url: `men`,
+                links: [
+                    { label: 'Все оправы', to: '/men' },
+                    { label: 'Очки для чтения', to: '/men', featureFilter: 'для чтения' },
+                ]
+            },
+            {
+                name: 'Дети',
+                url: `children`,
+                links: [
+                    { label: 'Все оправы', to: '/children' },
+                    { label: 'Для самых маленьких', to: '/children', featureFilter: 'Для самых маленьких' },
+                ]
+            },
+            {
+                name: 'Линзы',
+                url: `lenses`,
+                links: [
+                    { label: 'Все линзы', to: '/lenses' },
+                    { label: 'Однодневные', to: '/lenses', featureFilter: 'однодневные' },
+                    { label: 'Цветные', to: '/lenses', featureFilter: 'цветные' },
+                    { label: 'Астигматизм', to: '/lenses', featureFilter: 'астигматизм' },
+                ]
+            },
+        ],
 
     },
     reducers: {
@@ -36,7 +54,6 @@ const headerSlice = createSlice({
         toggleLoginModalOpened(state, action) {
             state.loginModalOpened = action.payload;
         },
-
     }
 })
 

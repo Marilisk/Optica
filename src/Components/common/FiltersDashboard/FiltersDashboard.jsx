@@ -26,53 +26,58 @@ export const FiltersDashboard = ({ filters, onSelectFilter, goodsAmount }) => {
             <MobileFiltersDashboard filters={filters}
                 onSelectFilter={onSelectFilter}
                 goodsAmount={goodsAmount}
-                mobileFiltersSwitched={mobileFiltersSwitched}     />
+                mobileFiltersSwitched={mobileFiltersSwitched} />
         </div>
 
-        <div className={c.menuBar} >
+        <div className={c.menuBar}>
 
             <div className={c.filters}>
                 <div className={c.selectedfilters}>
                     {goodsAmount} товаров:
-                    {filters.filter(elem => elem.isSelected).map(elem => {
-                        return <div key={elem.id}>
-                            {elem.label}: {elem.chosenOptions.map((el, ind) => {
-                                return <span key={ind}>{el} <img alt='' src={smallCross} onClick={() => onSelectFilter(elem.id, el)} /> </span>
-                            }
-                            )}
-                        </div>
+                    {filters.filter(elem => elem.isSelected).map((elem, index) => {
+                        if (elem.name !== 'gender') {
+                            return <div key={elem.id}>
+                                {elem.label}: {elem.chosenOptions.map((el, ind) => {
+                                    return <span key={ind}>{el} <img alt='' src={smallCross} onClick={() => onSelectFilter(elem.id, el)} /> </span>
+                                }
+                                )}
+                            </div>
+                        }
+
                     })}
                 </div>
 
-
-
                 <div className={c.filtersOptions}>
-                    {filters.map(elem => {
-                        return <div key={elem.name}
-                            className={filterOpened === elem.id ? c.filterName : c.otherFilterName}
-                            onMouseOver={() => onHover(elem.id)} onMouseLeave={() => onHover(null)}
-                            onClick={() => onHover(elem.id)} >
+                    {filters.map((elem, index) => {
+                        if (index > 0) {
+                            return <div key={elem.name}
+                                className={filterOpened === elem.id ? c.filterName : c.otherFilterName}
+                                onMouseOver={() => onHover(elem.id)} onMouseLeave={() => onHover(null)}
+                                onClick={() => onHover(elem.id)} >
 
                                 {elem.label} <img alt='' src={filterOpened === elem.id ? sortUpIcon : sortDownIcon} />
-                                {/* <img alt='' src={filterOpened === elem.id ? sortUpIcon : sortDownIcon} /> */}
-                            <div key={elem.name + 'd'}>
-                                <div key={elem.name + 'e'}
-                                    className={filterOpened === elem.id ? c.accordeon : c.hiddenAccordeon} >
 
-                                    {elem.options?.map(el => {
-                                        return <div key={el + 'c'} className={c.filterCheckBoxWrapper}>
-                                            <label className={c.filterCheckBoxLabel}>
-                                                <input type={'checkbox'}
-                                                    name={'checkbox'}
-                                                    checked={elem.chosenOptions.find(it => it === el)}
-                                                    onChange={() => onSelectFilter(elem.id, el)} />
-                                                {el}
-                                            </label>
-                                        </div>
-                                    })}
+                                <div key={elem.name + 'd'}>
+                                    <div key={elem.name + 'e'}
+                                        className={filterOpened === elem.id ? c.accordeon : c.hiddenAccordeon} >
+
+                                        {elem.options?.map(el => {
+                                            return <div key={el + 'c'} className={c.filterCheckBoxWrapper}>
+                                                <label className={c.filterCheckBoxLabel}>
+                                                    <input type={'checkbox'}
+                                                        name={'checkbox'}
+                                                        checked={elem.chosenOptions.find(it => it === el)}
+                                                        onChange={() => onSelectFilter(elem.id, el)} />
+                                                    {el}
+                                                </label>
+                                            </div>
+                                        })}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
+
                     })}
                 </div>
             </div>
@@ -85,7 +90,5 @@ export const FiltersDashboard = ({ filters, onSelectFilter, goodsAmount }) => {
 
         </div>
 
-
-        <div></div>
     </>
 }

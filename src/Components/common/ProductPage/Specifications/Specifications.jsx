@@ -2,7 +2,7 @@ import { AdminProductPanel } from '../../AdminProductPanel/AdminProductPanel';
 import c from './Specifications.module.scss';
 
 
-export const Specifications = ({ product, size, dispatch, IsManager }) => {
+export const Specifications = ({ product, dispatch, IsManager }) => {
     //console.log(product);
 
     return <div className={c.section}>
@@ -20,7 +20,7 @@ export const Specifications = ({ product, size, dispatch, IsManager }) => {
                         <span>Диапазон линз:</span> {product.prescriptionMin} ~ + {product.prescriptionMax}
                     </div>
                     <div className={c.line}>
-                        <span>Размер оправы:</span> {size}
+                        <span>Размер оправы:</span> {product.size}
                     </div>
                 </div>
                 <div>

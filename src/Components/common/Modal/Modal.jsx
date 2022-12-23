@@ -1,7 +1,5 @@
 
 import c from './Modal.module.scss';
-import homeIcon from './../../../assets/icons/home.svg';
-import angle from './../../../assets/icons/angle-right.svg';
 import { NavLink } from 'react-router-dom';
 
 

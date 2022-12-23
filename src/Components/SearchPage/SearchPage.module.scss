@@ -10,23 +10,16 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 $serif-font-family: 'Playfair Display SC', serif;
 
+.preloader {
 
-.linkList {
-    font-size: 14px;
-    color: $dark-violet;
-    ul {
-        padding: 0;
-        margin: 10%;
+    img {
+        width: 50%;
+        margin: 0 auto;
+        display: block;
     }
-    li {
-        margin-bottom: 10px;
-        &:hover {
-            transition: 200ms;
-            font-weight: 700;
-        }
-    }
-    a {
-        color: inherit;
+    h2 {
+        margin-top: 60px;
+        text-align: center;
     }
     
 }

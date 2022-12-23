@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { EyewearSize } from './EyewearSize/EyewearSize';
 import { Photos } from './Photos/Photos';
-import { Heart } from '../../../assets/icons/Heart';
 import { Specifications } from './Specifications/Specifications';
 import { Price } from './Price/Price';
 import { Preloader } from '../../../assets/common/Preloader/Preloader';
@@ -36,10 +35,6 @@ export const ProductPage = ({ addToFavorites, removeFromFavorites, userFavorites
 
     //console.log(product);
 
-    const size = product.frameWidth > 139 ? 'большие'
-        : product.frameWidth > 134 ? 'средние'
-            : product.frameWidth > 127 ? 'маленькие'
-                : 'детский';
     const price = product.price.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB' });
 
 
@@ -53,7 +48,7 @@ export const ProductPage = ({ addToFavorites, removeFromFavorites, userFavorites
                 <div className={c.rightPart}>
                     <h2>{product.name}</h2>
 
-                    <EyewearSize size={size} />
+                    <EyewearSize size={product.size} />
                     <Price price={price} />
 
                     <CustomerButtons isFavorite={isFavorite}
@@ -66,7 +61,7 @@ export const ProductPage = ({ addToFavorites, removeFromFavorites, userFavorites
             </div>
         </div>
 
-        <Specifications product={product} size={size} dispatch={dispatch} IsManager={IsManager} />
+        <Specifications product={product} dispatch={dispatch} IsManager={IsManager} />
 
     </>
 }

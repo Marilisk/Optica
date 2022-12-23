@@ -10,23 +10,18 @@ $small-fontSize: 14px;
 $light-background: #FAFAFA;
 $serif-font-family: 'Playfair Display SC', serif;
 
+.mainSection {
+    display: flex;
+    height: 15vw;
 
-.linkList {
-    font-size: 14px;
-    color: $dark-violet;
-    ul {
-        padding: 0;
-        margin: 10%;
-    }
-    li {
-        margin-bottom: 10px;
-        &:hover {
-            transition: 200ms;
-            font-weight: 700;
-        }
-    }
-    a {
-        color: inherit;
-    }
-    
+    //max-height: 150px;
+    @media (max-width: 533px) {
+        flex-direction: column-reverse;     
+    }  
+    @media (max-width: 1024px) {
+        height: 20vw;     
+    }  
+    @media (max-width: 768px) {
+        height: auto;
+    }  
 }
